@@ -1,7 +1,8 @@
 <div>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <h1>Reset password</h1>
+
+            <h2 class="form-signin-heading green">Reset password</h2>
 
             <div class="alert alert-danger" ng-show="keyMissing">
                 <strong>The password reset key is missing.</strong>
@@ -24,9 +25,53 @@
             </div>
 
             <div ng-hide="keyMissing">
-                <form ng-show="!success" name="form" role="form" novalidate ng-submit="finishReset()" show-validation>
+                <div class="well">
+                    <form ng-show="!success" name="form" role="form" novalidate ng-submit="finishReset()" show-validation>
+                        <div class="form-group">
+                            <label><small>New password</small></label>
+                            <input type="password" class="form-control" name="password" placeholder="New password"
+                                   ng-model="resetAccount.password" ng-minlength=5 ng-maxlength=50 required>
+                            <div ng-show="form.password.$dirty && form.password.$invalid">
+                                <p class="help-block"
+                                   ng-show="form.password.$error.required">
+                                    Your password is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.password.$error.minlength">
+                                    Your password is required to be at least 5 characters.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.password.$error.maxlength">
+                                    Your password cannot be longer than 50 characters.
+                                </p>
+                            </div>
+                            <password-strength-bar password-to-check="resetAccount.password"></password-strength-bar>
+                        </div>
+
+                        <div class="form-group">
+                            <label><small>Confirm your password</small></label>
+                            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm the new password"
+                                   ng-model="confirmPassword" ng-minlength=5 ng-maxlength=50 required>
+                            <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
+                                <p class="help-block"
+                                   ng-show="form.confirmPassword.$error.required">
+                                    Your password confirmation is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.confirmPassword.$error.minlength">
+                                    Your password confirmation is required to be at least 5 characters.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.confirmPassword.$error.maxlength">
+                                    Your password confirmation cannot be longer than 50 characters.
+                                </p>
+                            </div>
+                        </div>
+                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-success btn-lg btn-block">Reset Password</button>
+                    </form>
+                    <form ng-show="!success" name="form" role="form" novalidate ng-submit="finishReset()" show-validation>
                     <div class="form-group">
-                        <label>New password</label>
+                        <label><small>New password</small></label>
                         <input type="password" class="form-control" name="password" placeholder="New password"
                                ng-model="resetAccount.password" ng-minlength=5 ng-maxlength=50 required>
                         <div ng-show="form.password.$dirty && form.password.$invalid">
@@ -47,7 +92,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>New password confirmation</label>
+                        <label><small>Confirm your password</small></label>
                         <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm the new password"
                                ng-model="confirmPassword" ng-minlength=5 ng-maxlength=50 required>
                         <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
@@ -65,8 +110,9 @@
                             </p>
                         </div>
                     </div>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success">Reset Password</button>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success btn-lg btn-block">Reset Password</button>
                 </form>
+                </div>
             </div>
 
         </div>
