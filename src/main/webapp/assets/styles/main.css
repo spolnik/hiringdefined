@@ -1,5 +1,5 @@
 body {
-    background: #fafafa;
+    background: #eaf0f2;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
@@ -145,3 +145,41 @@ ul#strengthBar {
     width:20px;
 }
 /* end Password strength bar style */
+
+/* -----------
+--- CUSTOM ---
+------------*/
+.center {
+    text-align: center;
+}
+
+.navbar, .dropdown-menu {
+    background-color: #eaf0f2;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a,
+p.green,
+h2.green {
+    color: #549809;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #549809;
+  background-color: #E6EBED;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #549809;
+  background-color: #E6EBED;
+}
+
+.margin--left {
+  margin-left: 1rem!important;
+}
+
+.well {
+  background-color: #ffffff;
+}

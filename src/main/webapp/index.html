@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>hiringdefined</title>
+        <title>Hiring Defined</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -14,6 +14,7 @@
         <!-- endbuild -->
         <!-- build:css assets/styles/main.css -->
         <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="assets/styles/footer.css">
         <!-- endbuild -->
     </head>
     <body ng-app="hiringdefinedApp">
@@ -22,13 +23,33 @@
         <![endif]-->
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
-        <div class="container">
-            <div class="well" ui-view="content"></div>
+        <div ui-view="content" class="container"></div>
 
-            <div class="footer">
-                <p translate="footer">This is your footer</p>
-            </div>
-        </div>
+        <footer class="footer-basic-centered">
+
+            <p class="footer-company-motto">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                HIRING DEFINED
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </p>
+
+            <p class="footer-links">
+                <a href="/">Home</a>
+                ·
+                <a href="/">Blog</a>
+                ·
+                <a href="/">Pricing</a>
+                ·
+                <a href="/">About</a>
+                ·
+                <a href="/">Faq</a>
+                ·
+                <a href="/">Contact</a>
+            </p>
+
+            <p class="footer-company-name">HiringDefined Sp. z o.o. © 2015</p>
+
+        </footer>
 
         <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
         <script>

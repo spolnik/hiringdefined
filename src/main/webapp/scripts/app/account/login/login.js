@@ -7,8 +7,8 @@ angular.module('hiringdefinedApp')
                 parent: 'account',
                 url: '/login',
                 data: {
-                    roles: [], 
-                    pageTitle: 'Authentication'
+                    roles: [],
+                    pageTitle: 'Sign in'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,7 @@ angular.module('hiringdefinedApp')
                     }
                 },
                 resolve: {
-                    
+
                 }
             });
     });
