@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>Job</span> {{job.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span>CompanyName</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{job.companyName}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>JobTitle</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{job.jobTitle}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>JobCategory</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{job.jobCategory}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Location</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{job.location}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Description</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{job.description}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Requirements</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{job.requirements}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="job"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

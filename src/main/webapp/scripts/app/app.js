@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('hiringdefinedApp', ['LocalStorageModule', 
+angular.module('hiringdefinedApp', ['LocalStorageModule',
     'ngResource', 'ui.router', 'ngCookies', 'ngCacheBuster', 'infinite-scroll'])
 
     .run(function ($rootScope, $location, $window, $http, $state,  Auth, Principal, ENV, VERSION) {
@@ -13,11 +13,11 @@ angular.module('hiringdefinedApp', ['LocalStorageModule',
             if (Principal.isIdentityResolved()) {
                 Auth.authorize();
             }
-            
+
         });
 
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
-            var titleKey = 'hiringdefined' ;
+            var titleKey = 'Hiring Defined' ;
 
             $rootScope.previousStateName = fromState.name;
             $rootScope.previousStateParams = fromParams;
@@ -44,11 +44,11 @@ angular.module('hiringdefinedApp', ['LocalStorageModule',
             request: function (config) {
                 config.headers = config.headers || {};
                 var token = localStorageService.get('token');
-                
+
                 if (token && token.expires && token.expires > new Date().getTime()) {
                   config.headers['x-auth-token'] = token.token;
                 }
-                
+
                 return config;
             }
         };
@@ -80,5 +80,5 @@ angular.module('hiringdefinedApp', ['LocalStorageModule',
 
 
         $httpProvider.interceptors.push('authInterceptor');
-        
+
     });

@@ -1,0 +1,62 @@
+
+<div>
+    <h2><span>Candidate</span> {{candidate.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span>FullName</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{candidate.fullName}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Email</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{candidate.email}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>LinkedIn</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{candidate.linkedIn}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Github</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{candidate.github}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Motivation</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{candidate.motivation}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="candidate"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
