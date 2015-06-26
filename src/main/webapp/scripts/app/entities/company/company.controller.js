@@ -2,10 +2,10 @@
 
 angular.module('hiringdefinedApp')
     .controller('CompanyController', function ($scope, Company) {
-        $scope.companys = [];
+        $scope.companies = [];
         $scope.loadAll = function() {
             Company.query(function(result) {
-               $scope.companys = result;
+               $scope.companies = result;
             });
         };
         $scope.loadAll();

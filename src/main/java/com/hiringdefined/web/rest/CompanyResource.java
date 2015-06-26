@@ -38,9 +38,9 @@ public class CompanyResource {
     private CompanyMapper companyMapper;
 
     /**
-     * POST  /companys -> Create a new company.
+     * POST  /companies -> Create a new company.
      */
-    @RequestMapping(value = "/companys",
+    @RequestMapping(value = "/companies",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -51,13 +51,13 @@ public class CompanyResource {
         }
         Company company = companyMapper.companyDTOToCompany(companyDTO);
         companyRepository.save(company);
-        return ResponseEntity.created(new URI("/api/companys/" + companyDTO.getId())).build();
+        return ResponseEntity.created(new URI("/api/companies/" + companyDTO.getId())).build();
     }
 
     /**
-     * PUT  /companys -> Updates an existing company.
+     * PUT  /companies -> Updates an existing company.
      */
-    @RequestMapping(value = "/companys",
+    @RequestMapping(value = "/companies",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -72,24 +72,24 @@ public class CompanyResource {
     }
 
     /**
-     * GET  /companys -> get all the companys.
+     * GET  /companies -> get all the companies.
      */
-    @RequestMapping(value = "/companys",
+    @RequestMapping(value = "/companies",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
     public List<CompanyDTO> getAll() {
-        log.debug("REST request to get all Companys");
+        log.debug("REST request to get all Companies");
         return companyRepository.findAll().stream()
             .map(company -> companyMapper.companyToCompanyDTO(company))
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
-     * GET  /companys/:id -> get the "id" company.
+     * GET  /companies/:id -> get the "id" company.
      */
-    @RequestMapping(value = "/companys/{id}",
+    @RequestMapping(value = "/companies/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -104,9 +104,9 @@ public class CompanyResource {
     }
 
     /**
-     * DELETE  /companys/:id -> delete the "id" company.
+     * DELETE  /companies/:id -> delete the "id" company.
      */
-    @RequestMapping(value = "/companys/{id}",
+    @RequestMapping(value = "/companies/{id}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

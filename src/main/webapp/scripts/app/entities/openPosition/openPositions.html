@@ -1,16 +1,10 @@
 <div>
 
-    <h2>OpenPositions</h2>
+    <h2>Open Positions</h2>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#saveOpenPositionModal" ng-click="clear()">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new OpenPosition</span>
-                </button>
-            </div>
-        </div>
-    </div>
+    <button class="btn btn-success" data-toggle="modal" data-target="#saveOpenPositionModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-plus"></span> <span>Create</span>
+    </button>
 
     <div class="modal fade" id="saveOpenPositionModal" tabindex="-1" role="dialog" aria-labelledby="myOpenPositionLabel"
          aria-hidden="true">
@@ -32,8 +26,8 @@
 
                         <div class="form-group">
                             <label>Company Name</label>
-                            <input type="text" class="form-control" name="companyName"
-                                   ng-model="openPosition.companyName" required>
+                            <select class="form-control" ng-model="openPosition.companyName"
+                                    ng-options="company for company in companies"></select>
 
                             <div ng-show="editForm.companyName.$invalid">
                                 <p class="help-block"
@@ -56,8 +50,15 @@
                         </div>
                         <div class="form-group">
                             <label>Seniority</label>
-                            <input type="text" class="form-control" name="seniority"
-                                   ng-model="openPosition.seniority" required>
+
+                            <select class="form-control" ng-model="openPosition.seniority"
+                                    name="seniority" required>
+                                <option>Junior</option>
+                                <option>Regular</option>
+                                <option>Senior</option>
+                                <option>Lead</option>
+                                <option>Chief</option>
+                            </select>
 
                             <div ng-show="editForm.seniority.$invalid">
                                 <p class="help-block"
@@ -104,8 +105,13 @@
                         </div>
                         <div class="form-group">
                             <label>State</label>
-                            <input type="text" class="form-control" name="state"
-                                   ng-model="openPosition.state" required>
+
+                            <select class="form-control" ng-model="openPosition.state" name="state" required>
+                                <option>Open</option>
+                                <option>Accepted</option>
+                                <option>Rejected</option>
+                                <option>Withdraw</option>
+                            </select>
 
                             <div ng-show="editForm.state.$invalid">
                                 <p class="help-block"

@@ -84,15 +84,15 @@ public class CompanyResourceTest {
         int databaseSizeBeforeCreate = companyRepository.findAll().size();
 
         // Create the Company
-        restCompanyMockMvc.perform(post("/api/companys")
+        restCompanyMockMvc.perform(post("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isCreated());
 
         // Validate the Company in the database
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(databaseSizeBeforeCreate + 1);
-        Company testCompany = companys.get(companys.size() - 1);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(databaseSizeBeforeCreate + 1);
+        Company testCompany = companies.get(companies.size() - 1);
         assertThat(testCompany.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testCompany.getUrl()).isEqualTo(DEFAULT_URL);
         assertThat(testCompany.getContactPerson()).isEqualTo(DEFAULT_CONTACT_PERSON);
@@ -108,14 +108,14 @@ public class CompanyResourceTest {
         company.setCompanyName(null);
 
         // Create the Company, which fails.
-        restCompanyMockMvc.perform(post("/api/companys")
+        restCompanyMockMvc.perform(post("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isBadRequest());
 
         // Validate the database is still empty
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(0);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(0);
     }
 
     @Test
@@ -126,14 +126,14 @@ public class CompanyResourceTest {
         company.setUrl(null);
 
         // Create the Company, which fails.
-        restCompanyMockMvc.perform(post("/api/companys")
+        restCompanyMockMvc.perform(post("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isBadRequest());
 
         // Validate the database is still empty
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(0);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(0);
     }
 
     @Test
@@ -144,14 +144,14 @@ public class CompanyResourceTest {
         company.setContactPerson(null);
 
         // Create the Company, which fails.
-        restCompanyMockMvc.perform(post("/api/companys")
+        restCompanyMockMvc.perform(post("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isBadRequest());
 
         // Validate the database is still empty
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(0);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(0);
     }
 
     @Test
@@ -162,14 +162,14 @@ public class CompanyResourceTest {
         company.setContactEmail(null);
 
         // Create the Company, which fails.
-        restCompanyMockMvc.perform(post("/api/companys")
+        restCompanyMockMvc.perform(post("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isBadRequest());
 
         // Validate the database is still empty
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(0);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(0);
     }
 
     @Test
@@ -180,23 +180,23 @@ public class CompanyResourceTest {
         company.setOwner(null);
 
         // Create the Company, which fails.
-        restCompanyMockMvc.perform(post("/api/companys")
+        restCompanyMockMvc.perform(post("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isBadRequest());
 
         // Validate the database is still empty
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(0);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(0);
     }
 
     @Test
-    public void getAllCompanys() throws Exception {
+    public void getAllcompanies() throws Exception {
         // Initialize the database
         companyRepository.save(company);
 
-        // Get all the companys
-        restCompanyMockMvc.perform(get("/api/companys"))
+        // Get all the companies
+        restCompanyMockMvc.perform(get("/api/companies"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(company.getId())))
@@ -213,7 +213,7 @@ public class CompanyResourceTest {
         companyRepository.save(company);
 
         // Get the company
-        restCompanyMockMvc.perform(get("/api/companys/{id}", company.getId()))
+        restCompanyMockMvc.perform(get("/api/companies/{id}", company.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(company.getId()))
@@ -227,7 +227,7 @@ public class CompanyResourceTest {
     @Test
     public void getNonExistingCompany() throws Exception {
         // Get the company
-        restCompanyMockMvc.perform(get("/api/companys/{id}", Long.MAX_VALUE))
+        restCompanyMockMvc.perform(get("/api/companies/{id}", Long.MAX_VALUE))
                 .andExpect(status().isNotFound());
     }
 
@@ -244,15 +244,15 @@ public class CompanyResourceTest {
         company.setContactPerson(UPDATED_CONTACT_PERSON);
         company.setContactEmail(UPDATED_CONTACT_EMAIL);
         company.setOwner(UPDATED_OWNER);
-        restCompanyMockMvc.perform(put("/api/companys")
+        restCompanyMockMvc.perform(put("/api/companies")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
                 .andExpect(status().isOk());
 
         // Validate the Company in the database
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(databaseSizeBeforeUpdate);
-        Company testCompany = companys.get(companys.size() - 1);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(databaseSizeBeforeUpdate);
+        Company testCompany = companies.get(companies.size() - 1);
         assertThat(testCompany.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testCompany.getUrl()).isEqualTo(UPDATED_URL);
         assertThat(testCompany.getContactPerson()).isEqualTo(UPDATED_CONTACT_PERSON);
@@ -268,12 +268,12 @@ public class CompanyResourceTest {
 		int databaseSizeBeforeDelete = companyRepository.findAll().size();
 
         // Get the company
-        restCompanyMockMvc.perform(delete("/api/companys/{id}", company.getId())
+        restCompanyMockMvc.perform(delete("/api/companies/{id}", company.getId())
                 .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 
         // Validate the database is empty
-        List<Company> companys = companyRepository.findAll();
-        assertThat(companys).hasSize(databaseSizeBeforeDelete - 1);
+        List<Company> companies = companyRepository.findAll();
+        assertThat(companies).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

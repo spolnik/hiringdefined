@@ -1,13 +1,19 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('OpenPositionController', function ($scope, OpenPosition, ParseLinks) {
+    .controller('OpenPositionController', function ($scope, OpenPosition, ParseLinks, Company) {
         $scope.openPositions = [];
+        $scope.companies = [];
         $scope.page = 1;
         $scope.loadAll = function() {
             OpenPosition.query({page: $scope.page, per_page: 20}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.openPositions = result;
+            });
+            Company.query(function(result) {
+                $scope.companies = result.map(function(company) {
+                    return company.companyName;
+                });
             });
         };
         $scope.loadPage = function(page) {

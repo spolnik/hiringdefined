@@ -1,5 +1,5 @@
 import _root_.io.gatling.core.scenario.Simulation
-import ch.qos.logback.classic.{Level, LoggerContext}
+import ch.qos.logback.classic.LoggerContext
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import org.slf4j.LoggerFactory
@@ -62,13 +62,13 @@ class CompanyGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all companys")
-            .get("/api/companys")
+            exec(http("Get all companies")
+            .get("/api/companies")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new company")
-            .put("/api/companys")
+            .put("/api/companies")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "companyName":"SAMPLE_TEXT", "url":"SAMPLE_TEXT", "contactPerson":"SAMPLE_TEXT", "contactEmail":"SAMPLE_TEXT", "owner":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))

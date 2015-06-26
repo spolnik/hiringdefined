@@ -1,16 +1,10 @@
 <div>
 
-    <h2>Companys</h2>
+    <h2>Companies</h2>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#saveCompanyModal" ng-click="clear()">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Company</span>
-                </button>
-            </div>
-        </div>
-    </div>
+    <button class="btn btn-success" data-toggle="modal" data-target="#saveCompanyModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-plus"></span> <span>Create</span>
+    </button>
 
     <div class="modal fade" id="saveCompanyModal" tabindex="-1" role="dialog" aria-labelledby="myCompanyLabel"
          aria-hidden="true">
@@ -144,7 +138,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="company in companys">
+                <tr ng-repeat="company in companies">
                     <td><a ui-sref="companyDetail({id:company.id})">{{company.id}}</a></td>
                     <td>{{company.companyName}}</td>
                     <td>{{company.url}}</td>
