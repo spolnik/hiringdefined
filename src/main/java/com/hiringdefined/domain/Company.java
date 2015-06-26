@@ -33,6 +33,10 @@ public class Company implements Serializable {
     @Field("contact_email")
     private String contactEmail;
 
+    @NotNull
+    @Field("owner")
+    private String owner;
+
     public String getId() {
         return id;
     }
@@ -73,6 +77,14 @@ public class Company implements Serializable {
         this.contactEmail = contactEmail;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -102,6 +114,7 @@ public class Company implements Serializable {
                 ", url='" + url + "'" +
                 ", contactPerson='" + contactPerson + "'" +
                 ", contactEmail='" + contactEmail + "'" +
+                ", owner='" + owner + "'" +
                 '}';
     }
 }

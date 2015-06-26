@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>CompanyName</label>
+                            <label>Company Name</label>
                             <input type="text" class="form-control" name="companyName"
                                    ng-model="company.companyName" required>
 
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>ContactPerson</label>
+                            <label>Contact Person</label>
                             <input type="text" class="form-control" name="contactPerson"
                                    ng-model="company.contactPerson" required>
 
@@ -67,13 +67,25 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>ContactEmail</label>
+                            <label>Contact Email</label>
                             <input type="text" class="form-control" name="contactEmail"
                                    ng-model="company.contactEmail" required>
 
                             <div ng-show="editForm.contactEmail.$invalid">
                                 <p class="help-block"
                                    ng-show="editForm.contactEmail.$error.required">
+                                    This field is required.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Owner</label>
+                            <input type="text" class="form-control" name="owner"
+                                   ng-model="company.owner" required>
+
+                            <div ng-show="editForm.owner.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.owner.$error.required">
                                     This field is required.
                                 </p>
                             </div>
@@ -123,10 +135,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>CompanyName</th>
+                    <th>Company Name</th>
                     <th>Url</th>
-                    <th>ContactPerson</th>
-                    <th>ContactEmail</th>
+                    <th>Contact Person</th>
+                    <th>Contact Email</th>
+                    <th>Owner</th>
                     <th></th>
                 </tr>
             </thead>
@@ -137,6 +150,7 @@
                     <td>{{company.url}}</td>
                     <td>{{company.contactPerson}}</td>
                     <td>{{company.contactEmail}}</td>
+                    <td>{{company.owner}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="companyDetail({id:company.id})"

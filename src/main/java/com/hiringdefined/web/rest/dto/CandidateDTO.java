@@ -23,6 +23,8 @@ public class CandidateDTO implements Serializable {
 
     private String motivation;
 
+    private String owner;
+
     public String getId() {
         return id;
     }
@@ -75,6 +77,15 @@ public class CandidateDTO implements Serializable {
         this.motivation = motivation;
     }
 
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -105,6 +116,7 @@ public class CandidateDTO implements Serializable {
                 ", linkedIn='" + linkedIn + "'" +
                 ", github='" + github + "'" +
                 ", motivation='" + motivation + "'" +
+                ", owner='" + owner + "'" +
                 '}';
     }
 }

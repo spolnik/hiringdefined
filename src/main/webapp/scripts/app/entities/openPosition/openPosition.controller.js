@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('JobController', function ($scope, Job, ParseLinks) {
-        $scope.jobs = [];
+    .controller('OpenPositionController', function ($scope, OpenPosition, ParseLinks) {
+        $scope.openPositions = [];
         $scope.page = 1;
         $scope.loadAll = function() {
-            Job.query({page: $scope.page, per_page: 20}, function(result, headers) {
+            OpenPosition.query({page: $scope.page, per_page: 20}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
-                $scope.jobs = result;
+                $scope.openPositions = result;
             });
         };
         $scope.loadPage = function(page) {
@@ -17,20 +17,20 @@ angular.module('hiringdefinedApp')
         $scope.loadAll();
 
         $scope.showUpdate = function (id) {
-            Job.get({id: id}, function(result) {
-                $scope.job = result;
-                $('#saveJobModal').modal('show');
+            OpenPosition.get({id: id}, function(result) {
+                $scope.openPosition = result;
+                $('#saveOpenPositionModal').modal('show');
             });
         };
 
         $scope.save = function () {
-            if ($scope.job.id != null) {
-                Job.update($scope.job,
+            if ($scope.openPosition.id != null) {
+                OpenPosition.update($scope.openPosition,
                     function () {
                         $scope.refresh();
                     });
             } else {
-                Job.save($scope.job,
+                OpenPosition.save($scope.openPosition,
                     function () {
                         $scope.refresh();
                     });
@@ -38,29 +38,29 @@ angular.module('hiringdefinedApp')
         };
 
         $scope.delete = function (id) {
-            Job.get({id: id}, function(result) {
-                $scope.job = result;
-                $('#deleteJobConfirmation').modal('show');
+            OpenPosition.get({id: id}, function(result) {
+                $scope.openPosition = result;
+                $('#deleteOpenPositionConfirmation').modal('show');
             });
         };
 
         $scope.confirmDelete = function (id) {
-            Job.delete({id: id},
+            OpenPosition.delete({id: id},
                 function () {
                     $scope.loadAll();
-                    $('#deleteJobConfirmation').modal('hide');
+                    $('#deleteOpenPositionConfirmation').modal('hide');
                     $scope.clear();
                 });
         };
 
         $scope.refresh = function () {
             $scope.loadAll();
-            $('#saveJobModal').modal('hide');
+            $('#saveOpenPositionModal').modal('hide');
             $scope.clear();
         };
 
         $scope.clear = function () {
-            $scope.job = {companyName: null, jobTitle: null, jobCategory: null, location: null, description: null, requirements: null, id: null};
+            $scope.openPosition = {companyName: null, position: null, seniority: null, location: null, description: null, requirements: null, state: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

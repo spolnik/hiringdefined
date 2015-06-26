@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Job</span> {{job.id}}</h2>
+    <h2><span>OpenPosition</span> {{openPosition.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,26 +12,26 @@
             <tbody>
                 <tr>
                     <td>
-                        <span>CompanyName</span>
+                        <span>Company Name</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{job.companyName}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>JobTitle</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{job.jobTitle}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.companyName}}" readonly>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span>JobCategory</span>
+                        <span>Position</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{job.jobCategory}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.position}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Seniority</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.seniority}}" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -39,7 +39,7 @@
                         <span>Location</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{job.location}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.location}}" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +47,7 @@
                         <span>Description</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{job.description}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.description}}" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +55,15 @@
                         <span>Requirements</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{job.requirements}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.requirements}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>State</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.state}}" readonly>
                     </td>
                 </tr>
             </tbody>
@@ -63,7 +71,7 @@
     </div>
 
     <button type="submit"
-            ui-sref="job"
+            ui-sref="openPosition"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>

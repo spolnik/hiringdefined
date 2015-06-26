@@ -42,12 +42,14 @@ public class CandidateResourceTest {
     private static final String UPDATED_FULL_NAME = "UPDATED_TEXT";
     private static final String DEFAULT_EMAIL = "SAMPLE_TEXT";
     private static final String UPDATED_EMAIL = "UPDATED_TEXT";
-    private static final String DEFAULT_LINKED_IN = "SAMPLE_TEXT";
-    private static final String UPDATED_LINKED_IN = "UPDATED_TEXT";
+    private static final String DEFAULT_LINKEDIN = "SAMPLE_TEXT";
+    private static final String UPDATED_LINKEDIN = "UPDATED_TEXT";
     private static final String DEFAULT_GITHUB = "SAMPLE_TEXT";
     private static final String UPDATED_GITHUB = "UPDATED_TEXT";
     private static final String DEFAULT_MOTIVATION = "SAMPLE_TEXT";
     private static final String UPDATED_MOTIVATION = "UPDATED_TEXT";
+    private static final String DEFAULT_OWNER = "SAMPLE_TEXT";
+    private static final String UPDATED_OWNER = "UPDATED_TEXT";
 
     @Inject
     private CandidateRepository candidateRepository;
@@ -74,9 +76,10 @@ public class CandidateResourceTest {
         candidate = new Candidate();
         candidate.setFullName(DEFAULT_FULL_NAME);
         candidate.setEmail(DEFAULT_EMAIL);
-        candidate.setLinkedIn(DEFAULT_LINKED_IN);
+        candidate.setLinkedIn(DEFAULT_LINKEDIN);
         candidate.setGithub(DEFAULT_GITHUB);
         candidate.setMotivation(DEFAULT_MOTIVATION);
+        candidate.setOwner(DEFAULT_OWNER);
     }
 
     @Test
@@ -95,9 +98,10 @@ public class CandidateResourceTest {
         Candidate testCandidate = candidates.get(candidates.size() - 1);
         assertThat(testCandidate.getFullName()).isEqualTo(DEFAULT_FULL_NAME);
         assertThat(testCandidate.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testCandidate.getLinkedIn()).isEqualTo(DEFAULT_LINKED_IN);
+        assertThat(testCandidate.getLinkedIn()).isEqualTo(DEFAULT_LINKEDIN);
         assertThat(testCandidate.getGithub()).isEqualTo(DEFAULT_GITHUB);
         assertThat(testCandidate.getMotivation()).isEqualTo(DEFAULT_MOTIVATION);
+        assertThat(testCandidate.getOwner()).isEqualTo(DEFAULT_OWNER);
     }
 
     @Test
@@ -148,9 +152,10 @@ public class CandidateResourceTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(candidate.getId())))
                 .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME.toString())))
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].linkedIn").value(hasItem(DEFAULT_LINKED_IN.toString())))
+                .andExpect(jsonPath("$.[*].linkedIn").value(hasItem(DEFAULT_LINKEDIN.toString())))
                 .andExpect(jsonPath("$.[*].github").value(hasItem(DEFAULT_GITHUB.toString())))
-                .andExpect(jsonPath("$.[*].motivation").value(hasItem(DEFAULT_MOTIVATION.toString())));
+                .andExpect(jsonPath("$.[*].motivation").value(hasItem(DEFAULT_MOTIVATION.toString())))
+                .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())));
     }
 
     @Test
@@ -165,9 +170,10 @@ public class CandidateResourceTest {
             .andExpect(jsonPath("$.id").value(candidate.getId()))
             .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.linkedIn").value(DEFAULT_LINKED_IN.toString()))
+            .andExpect(jsonPath("$.linkedIn").value(DEFAULT_LINKEDIN.toString()))
             .andExpect(jsonPath("$.github").value(DEFAULT_GITHUB.toString()))
-            .andExpect(jsonPath("$.motivation").value(DEFAULT_MOTIVATION.toString()));
+            .andExpect(jsonPath("$.motivation").value(DEFAULT_MOTIVATION.toString()))
+            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.toString()));
     }
 
     @Test
@@ -187,9 +193,10 @@ public class CandidateResourceTest {
         // Update the candidate
         candidate.setFullName(UPDATED_FULL_NAME);
         candidate.setEmail(UPDATED_EMAIL);
-        candidate.setLinkedIn(UPDATED_LINKED_IN);
+        candidate.setLinkedIn(UPDATED_LINKEDIN);
         candidate.setGithub(UPDATED_GITHUB);
         candidate.setMotivation(UPDATED_MOTIVATION);
+        candidate.setOwner(UPDATED_OWNER);
         restCandidateMockMvc.perform(put("/api/candidates")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(candidate)))
@@ -201,9 +208,10 @@ public class CandidateResourceTest {
         Candidate testCandidate = candidates.get(candidates.size() - 1);
         assertThat(testCandidate.getFullName()).isEqualTo(UPDATED_FULL_NAME);
         assertThat(testCandidate.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCandidate.getLinkedIn()).isEqualTo(UPDATED_LINKED_IN);
+        assertThat(testCandidate.getLinkedIn()).isEqualTo(UPDATED_LINKEDIN);
         assertThat(testCandidate.getGithub()).isEqualTo(UPDATED_GITHUB);
         assertThat(testCandidate.getMotivation()).isEqualTo(UPDATED_MOTIVATION);
+        assertThat(testCandidate.getOwner()).isEqualTo(UPDATED_OWNER);
     }
 
     @Test

@@ -46,6 +46,8 @@ public class CompanyResourceTest {
     private static final String UPDATED_CONTACT_PERSON = "UPDATED_TEXT";
     private static final String DEFAULT_CONTACT_EMAIL = "SAMPLE_TEXT";
     private static final String UPDATED_CONTACT_EMAIL = "UPDATED_TEXT";
+    private static final String DEFAULT_OWNER = "SAMPLE_TEXT";
+    private static final String UPDATED_OWNER = "UPDATED_TEXT";
 
     @Inject
     private CompanyRepository companyRepository;
@@ -74,6 +76,7 @@ public class CompanyResourceTest {
         company.setUrl(DEFAULT_URL);
         company.setContactPerson(DEFAULT_CONTACT_PERSON);
         company.setContactEmail(DEFAULT_CONTACT_EMAIL);
+        company.setOwner(DEFAULT_OWNER);
     }
 
     @Test
@@ -94,6 +97,7 @@ public class CompanyResourceTest {
         assertThat(testCompany.getUrl()).isEqualTo(DEFAULT_URL);
         assertThat(testCompany.getContactPerson()).isEqualTo(DEFAULT_CONTACT_PERSON);
         assertThat(testCompany.getContactEmail()).isEqualTo(DEFAULT_CONTACT_EMAIL);
+        assertThat(testCompany.getOwner()).isEqualTo(DEFAULT_OWNER);
     }
 
     @Test
@@ -169,6 +173,24 @@ public class CompanyResourceTest {
     }
 
     @Test
+    public void checkOwnerIsRequired() throws Exception {
+        // Validate the database is empty
+        assertThat(companyRepository.findAll()).hasSize(0);
+        // set the field null
+        company.setOwner(null);
+
+        // Create the Company, which fails.
+        restCompanyMockMvc.perform(post("/api/companys")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(company)))
+                .andExpect(status().isBadRequest());
+
+        // Validate the database is still empty
+        List<Company> companys = companyRepository.findAll();
+        assertThat(companys).hasSize(0);
+    }
+
+    @Test
     public void getAllCompanys() throws Exception {
         // Initialize the database
         companyRepository.save(company);
@@ -181,7 +203,8 @@ public class CompanyResourceTest {
                 .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
                 .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
                 .andExpect(jsonPath("$.[*].contactPerson").value(hasItem(DEFAULT_CONTACT_PERSON.toString())))
-                .andExpect(jsonPath("$.[*].contactEmail").value(hasItem(DEFAULT_CONTACT_EMAIL.toString())));
+                .andExpect(jsonPath("$.[*].contactEmail").value(hasItem(DEFAULT_CONTACT_EMAIL.toString())))
+                .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())));
     }
 
     @Test
@@ -197,7 +220,8 @@ public class CompanyResourceTest {
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()))
             .andExpect(jsonPath("$.contactPerson").value(DEFAULT_CONTACT_PERSON.toString()))
-            .andExpect(jsonPath("$.contactEmail").value(DEFAULT_CONTACT_EMAIL.toString()));
+            .andExpect(jsonPath("$.contactEmail").value(DEFAULT_CONTACT_EMAIL.toString()))
+            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.toString()));
     }
 
     @Test
@@ -219,6 +243,7 @@ public class CompanyResourceTest {
         company.setUrl(UPDATED_URL);
         company.setContactPerson(UPDATED_CONTACT_PERSON);
         company.setContactEmail(UPDATED_CONTACT_EMAIL);
+        company.setOwner(UPDATED_OWNER);
         restCompanyMockMvc.perform(put("/api/companys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(company)))
@@ -232,6 +257,7 @@ public class CompanyResourceTest {
         assertThat(testCompany.getUrl()).isEqualTo(UPDATED_URL);
         assertThat(testCompany.getContactPerson()).isEqualTo(UPDATED_CONTACT_PERSON);
         assertThat(testCompany.getContactEmail()).isEqualTo(UPDATED_CONTACT_EMAIL);
+        assertThat(testCompany.getOwner()).isEqualTo(UPDATED_OWNER);
     }
 
     @Test

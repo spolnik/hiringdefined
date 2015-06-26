@@ -1,18 +1,18 @@
 <div>
 
-    <h2>Jobs</h2>
+    <h2>OpenPositions</h2>
 
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#saveJobModal" ng-click="clear()">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Job</span>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#saveOpenPositionModal" ng-click="clear()">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new OpenPosition</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="saveJobModal" tabindex="-1" role="dialog" aria-labelledby="myJobLabel"
+    <div class="modal fade" id="saveOpenPositionModal" tabindex="-1" role="dialog" aria-labelledby="myOpenPositionLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -21,19 +21,19 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myJobLabel">Create or edit a Job</h4>
+                        <h4 class="modal-title" id="myOpenPositionLabel">Create or edit a OpenPosition</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label>ID</label>
                             <input type="text" class="form-control" name="id"
-                                   ng-model="job.id" readonly>
+                                   ng-model="openPosition.id" readonly>
                         </div>
 
                         <div class="form-group">
-                            <label>CompanyName</label>
+                            <label>Company Name</label>
                             <input type="text" class="form-control" name="companyName"
-                                   ng-model="job.companyName" required>
+                                   ng-model="openPosition.companyName" required>
 
                             <div ng-show="editForm.companyName.$invalid">
                                 <p class="help-block"
@@ -43,25 +43,25 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>JobTitle</label>
-                            <input type="text" class="form-control" name="jobTitle"
-                                   ng-model="job.jobTitle" required>
+                            <label>Position</label>
+                            <input type="text" class="form-control" name="position"
+                                   ng-model="openPosition.position" required>
 
-                            <div ng-show="editForm.jobTitle.$invalid">
+                            <div ng-show="editForm.position.$invalid">
                                 <p class="help-block"
-                                   ng-show="editForm.jobTitle.$error.required">
+                                   ng-show="editForm.position.$error.required">
                                     This field is required.
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>JobCategory</label>
-                            <input type="text" class="form-control" name="jobCategory"
-                                   ng-model="job.jobCategory" required>
+                            <label>Seniority</label>
+                            <input type="text" class="form-control" name="seniority"
+                                   ng-model="openPosition.seniority" required>
 
-                            <div ng-show="editForm.jobCategory.$invalid">
+                            <div ng-show="editForm.seniority.$invalid">
                                 <p class="help-block"
-                                   ng-show="editForm.jobCategory.$error.required">
+                                   ng-show="editForm.seniority.$error.required">
                                     This field is required.
                                 </p>
                             </div>
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label>Location</label>
                             <input type="text" class="form-control" name="location"
-                                   ng-model="job.location" required>
+                                   ng-model="openPosition.location" required>
 
                             <div ng-show="editForm.location.$invalid">
                                 <p class="help-block"
@@ -81,7 +81,7 @@
                         <div class="form-group">
                             <label>Description</label>
                             <input type="text" class="form-control" name="description"
-                                   ng-model="job.description" required>
+                                   ng-model="openPosition.description" required>
 
                             <div ng-show="editForm.description.$invalid">
                                 <p class="help-block"
@@ -93,11 +93,23 @@
                         <div class="form-group">
                             <label>Requirements</label>
                             <input type="text" class="form-control" name="requirements"
-                                   ng-model="job.requirements" required>
+                                   ng-model="openPosition.requirements" required>
 
                             <div ng-show="editForm.requirements.$invalid">
                                 <p class="help-block"
                                    ng-show="editForm.requirements.$error.required">
+                                    This field is required.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" class="form-control" name="state"
+                                   ng-model="openPosition.state" required>
+
+                            <div ng-show="editForm.state.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.state.$error.required">
                                     This field is required.
                                 </p>
                             </div>
@@ -117,17 +129,17 @@
         </div>
     </div>
 
-    <div class="modal fade" id="deleteJobConfirmation">
+    <div class="modal fade" id="deleteOpenPositionConfirmation">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="deleteForm" ng-submit="confirmDelete(job.id)">
+                <form name="deleteForm" ng-submit="confirmDelete(openPosition.id)">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
                         <h4 class="modal-title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this Job?</p>
+                        <p>Are you sure you want to delete this OpenPosition?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -147,37 +159,39 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>CompanyName</th>
-                    <th>JobTitle</th>
-                    <th>JobCategory</th>
+                    <th>Company Name</th>
+                    <th>Position</th>
+                    <th>Seniority</th>
                     <th>Location</th>
                     <th>Description</th>
                     <th>Requirements</th>
+                    <th>State</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="job in jobs">
-                    <td><a ui-sref="jobDetail({id:job.id})">{{job.id}}</a></td>
-                    <td>{{job.companyName}}</td>
-                    <td>{{job.jobTitle}}</td>
-                    <td>{{job.jobCategory}}</td>
-                    <td>{{job.location}}</td>
-                    <td>{{job.description}}</td>
-                    <td>{{job.requirements}}</td>
+                <tr ng-repeat="openPosition in openPositions">
+                    <td><a ui-sref="openPositionDetail({id:openPosition.id})">{{openPosition.id}}</a></td>
+                    <td>{{openPosition.companyName}}</td>
+                    <td>{{openPosition.position}}</td>
+                    <td>{{openPosition.seniority}}</td>
+                    <td>{{openPosition.location}}</td>
+                    <td>{{openPosition.description}}</td>
+                    <td>{{openPosition.requirements}}</td>
+                    <td>{{openPosition.state}}</td>
                     <td>
                         <button type="submit"
-                                ui-sref="jobDetail({id:job.id})"
+                                ui-sref="openPositionDetail({id:openPosition.id})"
                                 class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
                         </button>
                         <button type="submit"
-                                ng-click="showUpdate(job.id)"
+                                ng-click="showUpdate(openPosition.id)"
                                 class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
                         </button>
                         <button type="submit"
-                                ng-click="delete(job.id)"
+                                ng-click="delete(openPosition.id)"
                                 class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
                         </button>

@@ -1,0 +1,76 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "companyName",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Company Name",
+            "fieldNameUnderscored": "company_name",
+            "fieldInJavaBeanMethod": "CompanyName",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "url",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Url",
+            "fieldNameUnderscored": "url",
+            "fieldInJavaBeanMethod": "Url",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "contactPerson",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Contact Person",
+            "fieldNameUnderscored": "contact_person",
+            "fieldInJavaBeanMethod": "ContactPerson",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "contactEmail",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Contact Email",
+            "fieldNameUnderscored": "contact_email",
+            "fieldInJavaBeanMethod": "ContactEmail",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "owner",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Owner",
+            "fieldNameUnderscored": "owner",
+            "fieldInJavaBeanMethod": "Owner",
+            "fieldValidate": true,
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOwnerOneToOne": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "dto": "mapstruct",
+    "pagination": "no",
+    "validation": true
+}

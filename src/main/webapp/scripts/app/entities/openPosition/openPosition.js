@@ -3,33 +3,33 @@
 angular.module('hiringdefinedApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('job', {
+            .state('openPosition', {
                 parent: 'entity',
-                url: '/job',
+                url: '/openPosition',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'Jobs'
+                    pageTitle: 'OpenPositions'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/job/jobs.html',
-                        controller: 'JobController'
+                        templateUrl: 'scripts/app/entities/openPosition/openPositions.html',
+                        controller: 'OpenPositionController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('jobDetail', {
+            .state('openPositionDetail', {
                 parent: 'entity',
-                url: '/job/:id',
+                url: '/openPosition/:id',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'Job'
+                    pageTitle: 'OpenPosition'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/job/job-detail.html',
-                        controller: 'JobDetailController'
+                        templateUrl: 'scripts/app/entities/openPosition/openPosition-detail.html',
+                        controller: 'OpenPositionDetailController'
                     }
                 },
                 resolve: {

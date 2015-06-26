@@ -183,3 +183,7 @@ h2.green {
 .well {
   background-color: #ffffff;
 }
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+  background-color: #549809;
+}

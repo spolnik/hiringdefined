@@ -54,7 +54,7 @@ angular.module('hiringdefinedApp')
         };
 
         $scope.clear = function () {
-            $scope.company = {companyName: null, url: null, contactPerson: null, contactEmail: null, id: null};
+            $scope.company = {companyName: null, url: null, contactPerson: null, contactEmail: null, owner: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

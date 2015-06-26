@@ -9,10 +9,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Job.
+ * A OpenPosition.
  */
-@Document(collection = "JOB")
-public class Job implements Serializable {
+@Document(collection = "OPENPOSITION")
+public class OpenPosition implements Serializable {
 
     @Id
     private String id;
@@ -22,12 +22,12 @@ public class Job implements Serializable {
     private String companyName;
 
     @NotNull
-    @Field("job_title")
-    private String jobTitle;
+    @Field("position")
+    private String position;
 
     @NotNull
-    @Field("job_category")
-    private String jobCategory;
+    @Field("seniority")
+    private String seniority;
 
     @NotNull
     @Field("location")
@@ -40,6 +40,10 @@ public class Job implements Serializable {
     @NotNull
     @Field("requirements")
     private String requirements;
+
+    @NotNull
+    @Field("state")
+    private String state;
 
     public String getId() {
         return id;
@@ -57,20 +61,20 @@ public class Job implements Serializable {
         this.companyName = companyName;
     }
 
-    public String getJobTitle() {
-        return jobTitle;
+    public String getPosition() {
+        return position;
     }
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public String getJobCategory() {
-        return jobCategory;
+    public String getSeniority() {
+        return seniority;
     }
 
-    public void setJobCategory(String jobCategory) {
-        this.jobCategory = jobCategory;
+    public void setSeniority(String seniority) {
+        this.seniority = seniority;
     }
 
     public String getLocation() {
@@ -97,6 +101,14 @@ public class Job implements Serializable {
         this.requirements = requirements;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -106,9 +118,9 @@ public class Job implements Serializable {
             return false;
         }
 
-        Job job = (Job) o;
+        OpenPosition openPosition = (OpenPosition) o;
 
-        if ( ! Objects.equals(id, job.id)) return false;
+        if ( ! Objects.equals(id, openPosition.id)) return false;
 
         return true;
     }
@@ -120,14 +132,15 @@ public class Job implements Serializable {
 
     @Override
     public String toString() {
-        return "Job{" +
+        return "OpenPosition{" +
                 "id=" + id +
                 ", companyName='" + companyName + "'" +
-                ", jobTitle='" + jobTitle + "'" +
-                ", jobCategory='" + jobCategory + "'" +
+                ", position='" + position + "'" +
+                ", seniority='" + seniority + "'" +
                 ", location='" + location + "'" +
                 ", description='" + description + "'" +
                 ", requirements='" + requirements + "'" +
+                ", state='" + state + "'" +
                 '}';
     }
 }

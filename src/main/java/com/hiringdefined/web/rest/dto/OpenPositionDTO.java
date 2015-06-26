@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the Job entity.
+ * A DTO for the OpenPosition entity.
  */
-public class JobDTO implements Serializable {
+public class OpenPositionDTO implements Serializable {
 
     private String id;
 
@@ -15,10 +15,10 @@ public class JobDTO implements Serializable {
     private String companyName;
 
     @NotNull
-    private String jobTitle;
+    private String position;
 
     @NotNull
-    private String jobCategory;
+    private String seniority;
 
     @NotNull
     private String location;
@@ -28,6 +28,9 @@ public class JobDTO implements Serializable {
 
     @NotNull
     private String requirements;
+
+    @NotNull
+    private String state;
 
     public String getId() {
         return id;
@@ -46,21 +49,21 @@ public class JobDTO implements Serializable {
     }
 
 
-    public String getJobTitle() {
-        return jobTitle;
+    public String getPosition() {
+        return position;
     }
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
 
-    public String getJobCategory() {
-        return jobCategory;
+    public String getSeniority() {
+        return seniority;
     }
 
-    public void setJobCategory(String jobCategory) {
-        this.jobCategory = jobCategory;
+    public void setSeniority(String seniority) {
+        this.seniority = seniority;
     }
 
 
@@ -90,6 +93,15 @@ public class JobDTO implements Serializable {
         this.requirements = requirements;
     }
 
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -99,9 +111,9 @@ public class JobDTO implements Serializable {
             return false;
         }
 
-        JobDTO jobDTO = (JobDTO) o;
+        OpenPositionDTO openPositionDTO = (OpenPositionDTO) o;
 
-        if ( ! Objects.equals(id, jobDTO.id)) return false;
+        if ( ! Objects.equals(id, openPositionDTO.id)) return false;
 
         return true;
     }
@@ -113,14 +125,15 @@ public class JobDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "JobDTO{" +
+        return "OpenPositionDTO{" +
                 "id=" + id +
                 ", companyName='" + companyName + "'" +
-                ", jobTitle='" + jobTitle + "'" +
-                ", jobCategory='" + jobCategory + "'" +
+                ", position='" + position + "'" +
+                ", seniority='" + seniority + "'" +
                 ", location='" + location + "'" +
                 ", description='" + description + "'" +
                 ", requirements='" + requirements + "'" +
+                ", state='" + state + "'" +
                 '}';
     }
 }

@@ -23,6 +23,9 @@ public class CompanyDTO implements Serializable {
     @NotNull
     private String contactEmail;
 
+    @NotNull
+    private String owner;
+
     public String getId() {
         return id;
     }
@@ -66,6 +69,15 @@ public class CompanyDTO implements Serializable {
         this.contactEmail = contactEmail;
     }
 
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -95,6 +107,7 @@ public class CompanyDTO implements Serializable {
                 ", url='" + url + "'" +
                 ", contactPerson='" + contactPerson + "'" +
                 ", contactEmail='" + contactEmail + "'" +
+                ", owner='" + owner + "'" +
                 '}';
     }
 }
