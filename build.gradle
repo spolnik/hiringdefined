@@ -30,6 +30,8 @@ bootRun {
     addResources = false
 }
 
+apply from: 'yeoman.gradle'
+
 apply from: 'liquibase.gradle'
 apply from: 'gatling.gradle'
 
