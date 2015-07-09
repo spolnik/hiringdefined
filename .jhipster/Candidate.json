@@ -1,76 +1,78 @@
 {
-    "relationships": [],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "fullName",
-            "fieldType": "String",
-            "fieldNameCapitalized": "FullName",
-            "fieldNameUnderscored": "full_name",
-            "fieldInJavaBeanMethod": "FullName",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "email",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Email",
-            "fieldNameUnderscored": "email",
-            "fieldInJavaBeanMethod": "Email",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "linkedIn",
-            "fieldType": "String",
-            "fieldNameCapitalized": "LinkedIn",
-            "fieldNameUnderscored": "linkedin",
-            "fieldInJavaBeanMethod": "LinkedIn",
-            "fieldValidate": false
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "github",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Github",
-            "fieldNameUnderscored": "github",
-            "fieldInJavaBeanMethod": "Github",
-            "fieldValidate": false
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "motivation",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Motivation",
-            "fieldNameUnderscored": "motivation",
-            "fieldInJavaBeanMethod": "Motivation",
-            "fieldValidate": false
-        },
-        {
-            "fieldId": 6,
-            "fieldName": "owner",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Owner",
-            "fieldNameUnderscored": "owner",
-            "fieldInJavaBeanMethod": "Owner",
-            "fieldValidate": false
-        }
-    ],
-    "fieldsContainOwnerManyToMany": false,
-    "fieldsContainOwnerOneToOne": false,
-    "fieldsContainOneToMany": false,
-    "fieldsContainLocalDate": false,
-    "fieldsContainCustomTime": false,
-    "fieldsContainBigDecimal": false,
-    "fieldsContainDateTime": false,
-    "fieldsContainDate": false,
-    "dto": "mapstruct",
-    "pagination": "pager",
-    "validation": true
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "company",
+      "relationshipNameCapitalized": "Company",
+      "relationshipFieldName": "company",
+      "otherEntityName": "company",
+      "otherEntityNameCapitalized": "Company",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "fullName",
+      "fieldNameCapitalized": "FullName",
+      "fieldNameUnderscored": "full_name",
+      "fieldInJavaBeanMethod": "FullName",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "email",
+      "fieldNameCapitalized": "Email",
+      "fieldNameUnderscored": "email",
+      "fieldInJavaBeanMethod": "Email",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "linkedin",
+      "fieldNameCapitalized": "Linkedin",
+      "fieldNameUnderscored": "linkedin",
+      "fieldInJavaBeanMethod": "Linkedin",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "github",
+      "fieldNameCapitalized": "Github",
+      "fieldNameUnderscored": "github",
+      "fieldInJavaBeanMethod": "Github",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 5,
+      "fieldName": "motivation",
+      "fieldNameCapitalized": "Motivation",
+      "fieldNameUnderscored": "motivation",
+      "fieldInJavaBeanMethod": "Motivation",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": false,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
 }

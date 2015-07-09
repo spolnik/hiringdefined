@@ -1,24 +1,14 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('OpenPositionController', function ($scope, OpenPosition, ParseLinks, Company) {
+    .controller('OpenPositionController', function ($scope, OpenPosition, Company, Interview) {
         $scope.openPositions = [];
-        $scope.companies = [];
-        $scope.page = 1;
+        $scope.companys = Company.query();
+        $scope.interviews = Interview.query();
         $scope.loadAll = function() {
-            OpenPosition.query({page: $scope.page, per_page: 20}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                $scope.openPositions = result;
+            OpenPosition.query(function(result) {
+               $scope.openPositions = result;
             });
-            Company.query(function(result) {
-                $scope.companies = result.map(function(company) {
-                    return company.companyName;
-                });
-            });
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
         };
         $scope.loadAll();
 
@@ -66,7 +56,7 @@ angular.module('hiringdefinedApp')
         };
 
         $scope.clear = function () {
-            $scope.openPosition = {companyName: null, position: null, seniority: null, location: null, description: null, requirements: null, state: null, id: null};
+            $scope.openPosition = {name: null, domain: null, level: null, location: null, description: null, requirements: null, state: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

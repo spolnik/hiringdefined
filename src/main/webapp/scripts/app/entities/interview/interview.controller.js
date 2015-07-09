@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('InterviewController', function ($scope, Interview) {
+    .controller('InterviewController', function ($scope, Interview, InterviewStep, OpenPosition, User) {
         $scope.interviews = [];
+        $scope.interviewsteps = InterviewStep.query();
+        $scope.openpositions = OpenPosition.query();
+        $scope.users = User.query();
         $scope.loadAll = function() {
             Interview.query(function(result) {
                $scope.interviews = result;
@@ -54,7 +57,7 @@ angular.module('hiringdefinedApp')
         };
 
         $scope.clear = function () {
-            $scope.interview = {companyName: null, position: null, seniority: null, id: null};
+            $scope.interview = {name: null, domain: null, level: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

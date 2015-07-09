@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_LDOj8CYnEeWLE5COzr4z2A" name="hiringdefined">
+  <eAnnotations xmi:id="_LDOj8SYnEeWLE5COzr4z2A" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_LDOj8iYnEeWLE5COzr4z2A" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_LDOj8yYnEeWLE5COzr4z2A" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LDOj9CYnEeWLE5COzr4z2A" name="Company">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOj9SYnEeWLE5COzr4z2A" name="candidate" visibility="public" type="_LDOkICYnEeWLE5COzr4z2A" aggregation="shared" association="_LDOkACYnEeWLE5COzr4z2A">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LDOj9iYnEeWLE5COzr4z2A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LDOj9yYnEeWLE5COzr4z2A"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOj-CYnEeWLE5COzr4z2A" name="openPosition" visibility="public" type="_LDOkBCYnEeWLE5COzr4z2A" aggregation="shared" association="_LDOkAiYnEeWLE5COzr4z2A">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LDOj-SYnEeWLE5COzr4z2A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LDOj-iYnEeWLE5COzr4z2A"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOj-yYnEeWLE5COzr4z2A" name="name" visibility="public" isUnique="false">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_LDOj_CYnEeWLE5COzr4z2A">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOj_SYnEeWLE5COzr4z2A" name="contactPerson" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOj_iYnEeWLE5COzr4z2A" name="contactEmail" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOj_yYnEeWLE5COzr4z2A" name="url" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LDOkACYnEeWLE5COzr4z2A" memberEnd="_LDOj9SYnEeWLE5COzr4z2A _LDOkASYnEeWLE5COzr4z2A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LDOkASYnEeWLE5COzr4z2A" visibility="public" type="_LDOj9CYnEeWLE5COzr4z2A" association="_LDOkACYnEeWLE5COzr4z2A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LDOkAiYnEeWLE5COzr4z2A" memberEnd="_LDOj-CYnEeWLE5COzr4z2A _LDOkAyYnEeWLE5COzr4z2A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LDOkAyYnEeWLE5COzr4z2A" visibility="public" type="_LDOj9CYnEeWLE5COzr4z2A" association="_LDOkAiYnEeWLE5COzr4z2A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LDOkBCYnEeWLE5COzr4z2A" name="OpenPosition">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkBSYnEeWLE5COzr4z2A" name="name" visibility="public" isUnique="false">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_LDOkBiYnEeWLE5COzr4z2A">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkByYnEeWLE5COzr4z2A" name="domain" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkCCYnEeWLE5COzr4z2A" name="level" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkCSYnEeWLE5COzr4z2A" name="location" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkCiYnEeWLE5COzr4z2A" name="description" visibility="public" isUnique="false">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_LDOkCyYnEeWLE5COzr4z2A">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkDCYnEeWLE5COzr4z2A" name="requirements" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkDSYnEeWLE5COzr4z2A" name="state" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LDOkDiYnEeWLE5COzr4z2A" name="Interview">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkDyYnEeWLE5COzr4z2A" name="interviewStep" visibility="public" type="_LDOkHSYnEeWLE5COzr4z2A" aggregation="shared" association="_LDOkGSYnEeWLE5COzr4z2A">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LDOkECYnEeWLE5COzr4z2A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LDOkESYnEeWLE5COzr4z2A"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkEiYnEeWLE5COzr4z2A" name="openPosition" visibility="public" type="_LDOkBCYnEeWLE5COzr4z2A" aggregation="shared" association="_LDOkGyYnEeWLE5COzr4z2A">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LDOkEyYnEeWLE5COzr4z2A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LDOkFCYnEeWLE5COzr4z2A"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkFSYnEeWLE5COzr4z2A" name="name" visibility="public" isUnique="false">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_LDOkFiYnEeWLE5COzr4z2A">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkFyYnEeWLE5COzr4z2A" name="domain" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkGCYnEeWLE5COzr4z2A" name="level" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LDOkGSYnEeWLE5COzr4z2A" memberEnd="_LDOkDyYnEeWLE5COzr4z2A _LDOkGiYnEeWLE5COzr4z2A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LDOkGiYnEeWLE5COzr4z2A" visibility="public" type="_LDOkDiYnEeWLE5COzr4z2A" association="_LDOkGSYnEeWLE5COzr4z2A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LDOkGyYnEeWLE5COzr4z2A" memberEnd="_LDOkEiYnEeWLE5COzr4z2A _LDOkHCYnEeWLE5COzr4z2A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LDOkHCYnEeWLE5COzr4z2A" visibility="public" type="_LDOkDiYnEeWLE5COzr4z2A" association="_LDOkGyYnEeWLE5COzr4z2A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LDOkHSYnEeWLE5COzr4z2A" name="InterviewStep">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkHiYnEeWLE5COzr4z2A" name="name" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkHyYnEeWLE5COzr4z2A" name="description" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LDOkICYnEeWLE5COzr4z2A" name="Candidate">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkISYnEeWLE5COzr4z2A" name="fullName" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkIiYnEeWLE5COzr4z2A" name="email" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkIyYnEeWLE5COzr4z2A" name="linkedin" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkJCYnEeWLE5COzr4z2A" name="github" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkJSYnEeWLE5COzr4z2A" name="motivation" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LDOkJiYnEeWLE5COzr4z2A" name="User">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkJyYnEeWLE5COzr4z2A" name="interview" visibility="public" type="_LDOkDiYnEeWLE5COzr4z2A" aggregation="shared" association="_LDOkLiYnEeWLE5COzr4z2A">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LDOkKCYnEeWLE5COzr4z2A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LDOkKSYnEeWLE5COzr4z2A"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkKiYnEeWLE5COzr4z2A" name="company" visibility="public" type="_LDOj9CYnEeWLE5COzr4z2A" aggregation="shared" association="_LDPLACYnEeWLE5COzr4z2A">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LDOkKyYnEeWLE5COzr4z2A" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LDOkLCYnEeWLE5COzr4z2A"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LDOkLSYnEeWLE5COzr4z2A" name="fullName" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LDOkLiYnEeWLE5COzr4z2A" memberEnd="_LDOkJyYnEeWLE5COzr4z2A _LDOkLyYnEeWLE5COzr4z2A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LDOkLyYnEeWLE5COzr4z2A" visibility="public" type="_LDOkJiYnEeWLE5COzr4z2A" association="_LDOkLiYnEeWLE5COzr4z2A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LDPLACYnEeWLE5COzr4z2A" memberEnd="_LDOkKiYnEeWLE5COzr4z2A _LDPLASYnEeWLE5COzr4z2A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_LDPLASYnEeWLE5COzr4z2A" visibility="public" type="_LDOkJiYnEeWLE5COzr4z2A" association="_LDPLACYnEeWLE5COzr4z2A"/>
+  </packagedElement>
+</uml:Model>

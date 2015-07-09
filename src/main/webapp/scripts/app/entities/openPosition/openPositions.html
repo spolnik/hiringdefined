@@ -1,16 +1,22 @@
 <div>
 
-    <h2>Open Positions</h2>
+    <h2>OpenPositions</h2>
 
-    <button class="btn btn-success" data-toggle="modal" data-target="#saveOpenPositionModal" ng-click="clear()">
-        <span class="glyphicon glyphicon-plus"></span> <span>Create</span>
-    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#saveOpenPositionModal" ng-click="clear()">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new OpenPosition</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="saveOpenPositionModal" tabindex="-1" role="dialog" aria-labelledby="myOpenPositionLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+                <form name="editForm" role="form" novalidate ng-submit="save()">
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -25,102 +31,58 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Company Name</label>
-                            <select class="form-control" ng-model="openPosition.companyName"
-                                    ng-options="company for company in companies"></select>
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name"
+                                   ng-model="openPosition.name">
 
-                            <div ng-show="editForm.companyName.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.companyName.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Position</label>
-                            <input type="text" class="form-control" name="position"
-                                   ng-model="openPosition.position" required>
+                            <label>Domain</label>
+                            <input type="text" class="form-control" name="domain"
+                                   ng-model="openPosition.domain">
 
-                            <div ng-show="editForm.position.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.position.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Seniority</label>
+                            <label>Level</label>
+                            <input type="text" class="form-control" name="level"
+                                   ng-model="openPosition.level">
 
-                            <select class="form-control" ng-model="openPosition.seniority"
-                                    name="seniority" required>
-                                <option>Junior</option>
-                                <option>Regular</option>
-                                <option>Senior</option>
-                                <option>Lead</option>
-                                <option>Chief</option>
-                            </select>
-
-                            <div ng-show="editForm.seniority.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.seniority.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>Location</label>
                             <input type="text" class="form-control" name="location"
-                                   ng-model="openPosition.location" required>
+                                   ng-model="openPosition.location">
 
-                            <div ng-show="editForm.location.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.location.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
                             <input type="text" class="form-control" name="description"
-                                   ng-model="openPosition.description" required>
+                                   ng-model="openPosition.description">
 
-                            <div ng-show="editForm.description.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.description.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>Requirements</label>
                             <input type="text" class="form-control" name="requirements"
-                                   ng-model="openPosition.requirements" required>
+                                   ng-model="openPosition.requirements">
 
-                            <div ng-show="editForm.requirements.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.requirements.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>State</label>
+                            <input type="text" class="form-control" name="state"
+                                   ng-model="openPosition.state">
 
-                            <select class="form-control" ng-model="openPosition.state" name="state" required>
-                                <option>Open</option>
-                                <option>Accepted</option>
-                                <option>Rejected</option>
-                                <option>Withdraw</option>
-                            </select>
-
-                            <div ng-show="editForm.state.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.state.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
 
+                        <div class="form-group">
+                            <label>company</label>
+                            <select class="form-control" name="company" ng-model="openPosition.company.id" ng-options="company.id as company.id for company in companys">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>interview</label>
+                            <select class="form-control" name="interview" ng-model="openPosition.interview.id" ng-options="interview.id as interview.id for interview in interviews">
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -165,26 +127,30 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Company Name</th>
-                    <th>Position</th>
-                    <th>Seniority</th>
+                    <th>Name</th>
+                    <th>Domain</th>
+                    <th>Level</th>
                     <th>Location</th>
                     <th>Description</th>
                     <th>Requirements</th>
                     <th>State</th>
+                    <th>company</th>
+                    <th>interview</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="openPosition in openPositions">
                     <td><a ui-sref="openPositionDetail({id:openPosition.id})">{{openPosition.id}}</a></td>
-                    <td>{{openPosition.companyName}}</td>
-                    <td>{{openPosition.position}}</td>
-                    <td>{{openPosition.seniority}}</td>
+                    <td>{{openPosition.name}}</td>
+                    <td>{{openPosition.domain}}</td>
+                    <td>{{openPosition.level}}</td>
                     <td>{{openPosition.location}}</td>
                     <td>{{openPosition.description}}</td>
                     <td>{{openPosition.requirements}}</td>
                     <td>{{openPosition.state}}</td>
+                    <td>{{openPosition.company.id}}</td>
+                    <td>{{openPosition.interview.id}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="openPositionDetail({id:openPosition.id})"
@@ -205,13 +171,5 @@
                 </tr>
             </tbody>
         </table>
-        <nav>
-            <ul class="pager">
-                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a href="#">&lt;&lt;</a></li>
-                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a href="#">&lt;</a></li>
-                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a href="#">&gt;</a></li>
-                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a href="#">&gt;&gt;</a></li>
-            </ul>
-        </nav>
     </div>
 </div>

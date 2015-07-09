@@ -8,11 +8,11 @@ angular.module('hiringdefinedApp')
                 url: '/company',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'Companies'
+                    pageTitle: 'Companys'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/company/companies.html',
+                        templateUrl: 'scripts/app/entities/company/companys.html',
                         controller: 'CompanyController'
                     }
                 },

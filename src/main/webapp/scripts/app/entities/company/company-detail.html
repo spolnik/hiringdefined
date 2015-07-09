@@ -12,10 +12,26 @@
             <tbody>
                 <tr>
                     <td>
-                        <span>Company Name</span>
+                        <span>Name</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{company.companyName}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{company.name}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>ContactPerson</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{company.contactPerson}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>ContactEmail</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{company.contactEmail}}" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -28,26 +44,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <span>Contact Person</span>
+                        <span>user</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{company.contactPerson}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>Contact Email</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{company.contactEmail}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>Owner</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{company.owner}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{company.user.id}}" readonly>
                     </td>
                 </tr>
             </tbody>

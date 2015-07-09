@@ -1,80 +1,83 @@
 package com.hiringdefined.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
  * A OpenPosition.
  */
-@Document(collection = "OPENPOSITION")
+@Entity
+@Table(name = "OPENPOSITION")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class OpenPosition implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @NotNull
-    @Field("company_name")
-    private String companyName;
+    @Column(name = "name")
+    private String name;
 
-    @NotNull
-    @Field("position")
-    private String position;
+    @Column(name = "domain")
+    private String domain;
 
-    @NotNull
-    @Field("seniority")
-    private String seniority;
+    @Column(name = "level")
+    private String level;
 
-    @NotNull
-    @Field("location")
+    @Column(name = "location")
     private String location;
 
-    @NotNull
-    @Field("description")
+    @Column(name = "description")
     private String description;
 
-    @NotNull
-    @Field("requirements")
+    @Column(name = "requirements")
     private String requirements;
 
-    @NotNull
-    @Field("state")
+    @Column(name = "state")
     private String state;
 
-    public String getId() {
+    @ManyToOne
+    private Company company;
+
+    @ManyToOne
+    private Interview interview;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPosition() {
-        return position;
+    public String getDomain() {
+        return domain;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
-    public String getSeniority() {
-        return seniority;
+    public String getLevel() {
+        return level;
     }
 
-    public void setSeniority(String seniority) {
-        this.seniority = seniority;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getLocation() {
@@ -109,6 +112,22 @@ public class OpenPosition implements Serializable {
         this.state = state;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Interview getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Interview interview) {
+        this.interview = interview;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -134,9 +153,9 @@ public class OpenPosition implements Serializable {
     public String toString() {
         return "OpenPosition{" +
                 "id=" + id +
-                ", companyName='" + companyName + "'" +
-                ", position='" + position + "'" +
-                ", seniority='" + seniority + "'" +
+                ", name='" + name + "'" +
+                ", domain='" + domain + "'" +
+                ", level='" + level + "'" +
                 ", location='" + location + "'" +
                 ", description='" + description + "'" +
                 ", requirements='" + requirements + "'" +

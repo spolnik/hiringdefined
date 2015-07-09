@@ -1,11 +1,13 @@
 package com.hiringdefined.repository;
 
 import com.hiringdefined.domain.Candidate;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.*;
+
+import java.util.List;
 
 /**
- * Spring Data MongoDB repository for the Candidate entity.
+ * Spring Data JPA repository for the Candidate entity.
  */
-public interface CandidateRepository extends MongoRepository<Candidate,String> {
+public interface CandidateRepository extends JpaRepository<Candidate,Long> {
 
 }

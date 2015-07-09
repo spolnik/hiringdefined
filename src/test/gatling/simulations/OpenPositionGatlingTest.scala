@@ -70,7 +70,7 @@ class OpenPositionGatlingTest extends Simulation {
             .exec(http("Create new openPosition")
             .put("/api/openPositions")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "companyName":"SAMPLE_TEXT", "position":"SAMPLE_TEXT", "seniority":"SAMPLE_TEXT", "location":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "requirements":"SAMPLE_TEXT", "state":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "domain":"SAMPLE_TEXT", "level":"SAMPLE_TEXT", "location":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "requirements":"SAMPLE_TEXT", "state":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_openPosition_url")))
             .pause(10)

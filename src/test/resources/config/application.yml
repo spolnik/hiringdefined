@@ -4,7 +4,7 @@ server:
 
 
 # security configuration (this key should be unique for your application, and kept secret)
-jhipster.security.rememberme.key: 5d2bee5548b5124619985c04ec09f76bab85670e
+jhipster.security.rememberme.key: bd5c62da8ade138110ea4a0ce0b743f9decef658
 
 async:
     corePoolSize: 2
@@ -15,11 +15,28 @@ liquibase:
     context: test
 
 spring:
-    data:
-        mongodb:
-            host: localhost
-            port: 27017
-            database: hiringdefined
+    datasource:
+        dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+        url: jdbc:h2:mem:hiringdefined;DB_CLOSE_DELAY=-1
+        databaseName:
+        serverName:
+        username:
+        password:
+
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        database: H2
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.hbm2ddl.auto: validate
 
 mail:
     host: localhost

@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('CompanyController', function ($scope, Company) {
-        $scope.companies = [];
+    .controller('CompanyController', function ($scope, Company, Candidate, OpenPosition, User) {
+        $scope.companys = [];
+        $scope.candidates = Candidate.query();
+        $scope.openpositions = OpenPosition.query();
+        $scope.users = User.query();
         $scope.loadAll = function() {
             Company.query(function(result) {
-               $scope.companies = result;
+               $scope.companys = result;
             });
         };
         $scope.loadAll();
@@ -54,7 +57,7 @@ angular.module('hiringdefinedApp')
         };
 
         $scope.clear = function () {
-            $scope.company = {companyName: null, url: null, contactPerson: null, contactEmail: null, owner: null, id: null};
+            $scope.company = {name: null, contactPerson: null, contactEmail: null, url: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

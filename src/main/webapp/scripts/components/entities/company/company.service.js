@@ -2,7 +2,7 @@
 
 angular.module('hiringdefinedApp')
     .factory('Company', function ($resource, DateUtils) {
-        return $resource('api/companies/:id', {}, {
+        return $resource('api/companys/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

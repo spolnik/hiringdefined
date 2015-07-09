@@ -1,18 +1,13 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('CandidateController', function ($scope, Candidate, ParseLinks) {
+    .controller('CandidateController', function ($scope, Candidate, Company) {
         $scope.candidates = [];
-        $scope.page = 1;
+        $scope.companys = Company.query();
         $scope.loadAll = function() {
-            Candidate.query({page: $scope.page, per_page: 20}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                $scope.candidates = result;
+            Candidate.query(function(result) {
+               $scope.candidates = result;
             });
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
         };
         $scope.loadAll();
 
@@ -60,7 +55,7 @@ angular.module('hiringdefinedApp')
         };
 
         $scope.clear = function () {
-            $scope.candidate = {fullName: null, email: null, linkedIn: null, github: null, motivation: null, owner: null, id: null};
+            $scope.candidate = {fullName: null, email: null, linkedin: null, github: null, motivation: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

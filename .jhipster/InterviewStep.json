@@ -1,52 +1,48 @@
 {
-    "relationships": [],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "name",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Name",
-            "fieldNameUnderscored": "name",
-            "fieldInJavaBeanMethod": "Name",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "description",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Description",
-            "fieldNameUnderscored": "description",
-            "fieldInJavaBeanMethod": "Description",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "stageNr",
-            "fieldType": "String",
-            "fieldNameCapitalized": "StageNr",
-            "fieldNameUnderscored": "stage_nr",
-            "fieldInJavaBeanMethod": "StageNr",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "fieldsContainOwnerManyToMany": false,
-    "fieldsContainOwnerOneToOne": false,
-    "fieldsContainOneToMany": false,
-    "fieldsContainLocalDate": false,
-    "fieldsContainCustomTime": false,
-    "fieldsContainBigDecimal": false,
-    "fieldsContainDateTime": false,
-    "fieldsContainDate": false,
-    "dto": "mapstruct",
-    "pagination": "no",
-    "validation": true
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "interview",
+      "relationshipNameCapitalized": "Interview",
+      "relationshipFieldName": "interview",
+      "otherEntityName": "interview",
+      "otherEntityNameCapitalized": "Interview",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldNameCapitalized": "Name",
+      "fieldNameUnderscored": "name",
+      "fieldInJavaBeanMethod": "Name",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "description",
+      "fieldNameCapitalized": "Description",
+      "fieldNameUnderscored": "description",
+      "fieldInJavaBeanMethod": "Description",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": false,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
 }

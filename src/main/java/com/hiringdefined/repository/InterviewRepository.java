@@ -1,11 +1,16 @@
 package com.hiringdefined.repository;
 
 import com.hiringdefined.domain.Interview;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.*;
+
+import java.util.List;
 
 /**
- * Spring Data MongoDB repository for the Interview entity.
+ * Spring Data JPA repository for the Interview entity.
  */
-public interface InterviewRepository extends MongoRepository<Interview,String> {
+public interface InterviewRepository extends JpaRepository<Interview,Long> {
+
+    @Query("select interview from Interview interview where interview.user.login = ?#{principal.username}")
+    List<Interview> findAllForCurrentUser();
 
 }

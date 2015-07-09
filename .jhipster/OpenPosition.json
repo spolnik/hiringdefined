@@ -1,100 +1,108 @@
 {
-    "relationships": [],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "companyName",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Company Name",
-            "fieldNameUnderscored": "company_name",
-            "fieldInJavaBeanMethod": "CompanyName",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "position",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Position",
-            "fieldNameUnderscored": "position",
-            "fieldInJavaBeanMethod": "Position",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "seniority",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Seniority",
-            "fieldNameUnderscored": "seniority",
-            "fieldInJavaBeanMethod": "Seniority",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "location",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Location",
-            "fieldNameUnderscored": "location",
-            "fieldInJavaBeanMethod": "Location",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "description",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Description",
-            "fieldNameUnderscored": "description",
-            "fieldInJavaBeanMethod": "Description",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 6,
-            "fieldName": "requirements",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Requirements",
-            "fieldNameUnderscored": "requirements",
-            "fieldInJavaBeanMethod": "Requirements",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 7,
-            "fieldName": "state",
-            "fieldType": "String",
-            "fieldNameCapitalized": "State",
-            "fieldNameUnderscored": "state",
-            "fieldInJavaBeanMethod": "State",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "fieldsContainOwnerManyToMany": false,
-    "fieldsContainOwnerOneToOne": false,
-    "fieldsContainOneToMany": false,
-    "fieldsContainLocalDate": false,
-    "fieldsContainCustomTime": false,
-    "fieldsContainBigDecimal": false,
-    "fieldsContainDateTime": false,
-    "fieldsContainDate": false,
-    "dto": "mapstruct",
-    "pagination": "pager",
-    "validation": true
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "company",
+      "relationshipNameCapitalized": "Company",
+      "relationshipFieldName": "company",
+      "otherEntityName": "company",
+      "otherEntityNameCapitalized": "Company",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "interview",
+      "relationshipNameCapitalized": "Interview",
+      "relationshipFieldName": "interview",
+      "otherEntityName": "interview",
+      "otherEntityNameCapitalized": "Interview",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldNameCapitalized": "Name",
+      "fieldNameUnderscored": "name",
+      "fieldInJavaBeanMethod": "Name",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "domain",
+      "fieldNameCapitalized": "Domain",
+      "fieldNameUnderscored": "domain",
+      "fieldInJavaBeanMethod": "Domain",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "level",
+      "fieldNameCapitalized": "Level",
+      "fieldNameUnderscored": "level",
+      "fieldInJavaBeanMethod": "Level",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "location",
+      "fieldNameCapitalized": "Location",
+      "fieldNameUnderscored": "location",
+      "fieldInJavaBeanMethod": "Location",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 5,
+      "fieldName": "description",
+      "fieldNameCapitalized": "Description",
+      "fieldNameUnderscored": "description",
+      "fieldInJavaBeanMethod": "Description",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 6,
+      "fieldName": "requirements",
+      "fieldNameCapitalized": "Requirements",
+      "fieldNameUnderscored": "requirements",
+      "fieldInJavaBeanMethod": "Requirements",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 7,
+      "fieldName": "state",
+      "fieldNameCapitalized": "State",
+      "fieldNameUnderscored": "state",
+      "fieldInJavaBeanMethod": "State",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": false,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
 }

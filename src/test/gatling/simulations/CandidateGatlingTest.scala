@@ -70,7 +70,7 @@ class CandidateGatlingTest extends Simulation {
             .exec(http("Create new candidate")
             .put("/api/candidates")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "fullName":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "linkedIn":"SAMPLE_TEXT", "github":"SAMPLE_TEXT", "motivation":"SAMPLE_TEXT", "owner":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "fullName":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "linkedin":"SAMPLE_TEXT", "github":"SAMPLE_TEXT", "motivation":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_candidate_url")))
             .pause(10)

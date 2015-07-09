@@ -1,16 +1,22 @@
 <div>
 
-    <h2>Companies</h2>
+    <h2>Companys</h2>
 
-    <button class="btn btn-success" data-toggle="modal" data-target="#saveCompanyModal" ng-click="clear()">
-        <span class="glyphicon glyphicon-plus"></span> <span>Create</span>
-    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#saveCompanyModal" ng-click="clear()">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Company</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="saveCompanyModal" tabindex="-1" role="dialog" aria-labelledby="myCompanyLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+                <form name="editForm" role="form" novalidate ng-submit="save()">
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -25,66 +31,35 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Company Name</label>
-                            <input type="text" class="form-control" name="companyName"
-                                   ng-model="company.companyName" required>
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name"
+                                   ng-model="company.name">
 
-                            <div ng-show="editForm.companyName.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.companyName.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>ContactPerson</label>
+                            <input type="text" class="form-control" name="contactPerson"
+                                   ng-model="company.contactPerson">
+
+                        </div>
+                        <div class="form-group">
+                            <label>ContactEmail</label>
+                            <input type="text" class="form-control" name="contactEmail"
+                                   ng-model="company.contactEmail">
+
                         </div>
                         <div class="form-group">
                             <label>Url</label>
                             <input type="text" class="form-control" name="url"
-                                   ng-model="company.url" required>
+                                   ng-model="company.url">
 
-                            <div ng-show="editForm.url.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.url.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label>Contact Person</label>
-                            <input type="text" class="form-control" name="contactPerson"
-                                   ng-model="company.contactPerson" required>
-
-                            <div ng-show="editForm.contactPerson.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.contactPerson.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
+                            <label>user</label>
+                            <select class="form-control" name="user" ng-model="company.user.id" ng-options="user.id as user.id for user in users">
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label>Contact Email</label>
-                            <input type="text" class="form-control" name="contactEmail"
-                                   ng-model="company.contactEmail" required>
-
-                            <div ng-show="editForm.contactEmail.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.contactEmail.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Owner</label>
-                            <input type="text" class="form-control" name="owner"
-                                   ng-model="company.owner" required>
-
-                            <div ng-show="editForm.owner.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.owner.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -129,22 +104,22 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Company Name</th>
+                    <th>Name</th>
+                    <th>ContactPerson</th>
+                    <th>ContactEmail</th>
                     <th>Url</th>
-                    <th>Contact Person</th>
-                    <th>Contact Email</th>
-                    <th>Owner</th>
+                    <th>user</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="company in companies">
+                <tr ng-repeat="company in companys">
                     <td><a ui-sref="companyDetail({id:company.id})">{{company.id}}</a></td>
-                    <td>{{company.companyName}}</td>
-                    <td>{{company.url}}</td>
+                    <td>{{company.name}}</td>
                     <td>{{company.contactPerson}}</td>
                     <td>{{company.contactEmail}}</td>
-                    <td>{{company.owner}}</td>
+                    <td>{{company.url}}</td>
+                    <td>{{company.user.id}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="companyDetail({id:company.id})"

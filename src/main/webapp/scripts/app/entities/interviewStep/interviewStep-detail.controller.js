@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hiringdefinedApp')
-    .controller('InterviewStepDetailController', function ($scope, $stateParams, InterviewStep) {
+    .controller('InterviewStepDetailController', function ($scope, $stateParams, InterviewStep, Interview) {
         $scope.interviewStep = {};
         $scope.load = function (id) {
             InterviewStep.get({id: id}, function(result) {

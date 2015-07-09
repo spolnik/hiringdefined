@@ -70,7 +70,7 @@ class InterviewGatlingTest extends Simulation {
             .exec(http("Create new interview")
             .put("/api/interviews")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "companyName":"SAMPLE_TEXT", "position":"SAMPLE_TEXT", "seniority":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "domain":"SAMPLE_TEXT", "level":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_interview_url")))
             .pause(10)

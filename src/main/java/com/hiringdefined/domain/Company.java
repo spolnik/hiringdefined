@@ -1,64 +1,66 @@
 package com.hiringdefined.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
  * A Company.
  */
-@Document(collection = "COMPANY")
+@Entity
+@Table(name = "COMPANY")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Company implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @NotNull
-    @Field("company_name")
-    private String companyName;
+    @Column(name = "name")
+    private String name;
 
-    @NotNull
-    @Field("url")
-    private String url;
-
-    @NotNull
-    @Field("contact_person")
+    @Column(name = "contact_person")
     private String contactPerson;
 
-    @NotNull
-    @Field("contact_email")
+    @Column(name = "contact_email")
     private String contactEmail;
 
-    @NotNull
-    @Field("owner")
-    private String owner;
+    @Column(name = "url")
+    private String url;
 
-    public String getId() {
+    @OneToMany(mappedBy = "company")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Candidate> candidates = new HashSet<>();
+
+    @OneToMany(mappedBy = "company")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<OpenPosition> openPositions = new HashSet<>();
+
+    @ManyToOne
+    private User user;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContactPerson() {
@@ -77,12 +79,36 @@ public class Company implements Serializable {
         this.contactEmail = contactEmail;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getUrl() {
+        return url;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Set<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Set<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public Set<OpenPosition> getOpenPositions() {
+        return openPositions;
+    }
+
+    public void setOpenPositions(Set<OpenPosition> openPositions) {
+        this.openPositions = openPositions;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -110,11 +136,10 @@ public class Company implements Serializable {
     public String toString() {
         return "Company{" +
                 "id=" + id +
-                ", companyName='" + companyName + "'" +
-                ", url='" + url + "'" +
+                ", name='" + name + "'" +
                 ", contactPerson='" + contactPerson + "'" +
                 ", contactEmail='" + contactEmail + "'" +
-                ", owner='" + owner + "'" +
+                ", url='" + url + "'" +
                 '}';
     }
 }

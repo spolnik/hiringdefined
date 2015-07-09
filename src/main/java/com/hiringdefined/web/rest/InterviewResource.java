@@ -3,24 +3,18 @@ package com.hiringdefined.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.hiringdefined.domain.Interview;
 import com.hiringdefined.repository.InterviewRepository;
-import com.hiringdefined.web.rest.dto.InterviewDTO;
-import com.hiringdefined.web.rest.mapper.InterviewMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Interview.
@@ -34,9 +28,6 @@ public class InterviewResource {
     @Inject
     private InterviewRepository interviewRepository;
 
-    @Inject
-    private InterviewMapper interviewMapper;
-
     /**
      * POST  /interviews -> Create a new interview.
      */
@@ -44,14 +35,13 @@ public class InterviewResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> create(@Valid @RequestBody InterviewDTO interviewDTO) throws URISyntaxException {
-        log.debug("REST request to save Interview : {}", interviewDTO);
-        if (interviewDTO.getId() != null) {
+    public ResponseEntity<Void> create(@RequestBody Interview interview) throws URISyntaxException {
+        log.debug("REST request to save Interview : {}", interview);
+        if (interview.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new interview cannot already have an ID").build();
         }
-        Interview interview = interviewMapper.interviewDTOToInterview(interviewDTO);
         interviewRepository.save(interview);
-        return ResponseEntity.created(new URI("/api/interviews/" + interviewDTO.getId())).build();
+        return ResponseEntity.created(new URI("/api/interviews/" + interview.getId())).build();
     }
 
     /**
@@ -61,12 +51,11 @@ public class InterviewResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> update(@Valid @RequestBody InterviewDTO interviewDTO) throws URISyntaxException {
-        log.debug("REST request to update Interview : {}", interviewDTO);
-        if (interviewDTO.getId() == null) {
-            return create(interviewDTO);
+    public ResponseEntity<Void> update(@RequestBody Interview interview) throws URISyntaxException {
+        log.debug("REST request to update Interview : {}", interview);
+        if (interview.getId() == null) {
+            return create(interview);
         }
-        Interview interview = interviewMapper.interviewDTOToInterview(interviewDTO);
         interviewRepository.save(interview);
         return ResponseEntity.ok().build();
     }
@@ -78,12 +67,9 @@ public class InterviewResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional(readOnly = true)
-    public List<InterviewDTO> getAll() {
+    public List<Interview> getAll() {
         log.debug("REST request to get all Interviews");
-        return interviewRepository.findAll().stream()
-            .map(interview -> interviewMapper.interviewToInterviewDTO(interview))
-            .collect(Collectors.toCollection(LinkedList::new));
+        return interviewRepository.findAll();
     }
 
     /**
@@ -93,12 +79,11 @@ public class InterviewResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<InterviewDTO> get(@PathVariable String id) {
+    public ResponseEntity<Interview> get(@PathVariable Long id) {
         log.debug("REST request to get Interview : {}", id);
         return Optional.ofNullable(interviewRepository.findOne(id))
-            .map(interviewMapper::interviewToInterviewDTO)
-            .map(interviewDTO -> new ResponseEntity<>(
-                interviewDTO,
+            .map(interview -> new ResponseEntity<>(
+                interview,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -110,7 +95,7 @@ public class InterviewResource {
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable Long id) {
         log.debug("REST request to delete Interview : {}", id);
         interviewRepository.delete(id);
     }

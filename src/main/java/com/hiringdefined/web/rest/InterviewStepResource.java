@@ -3,24 +3,18 @@ package com.hiringdefined.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.hiringdefined.domain.InterviewStep;
 import com.hiringdefined.repository.InterviewStepRepository;
-import com.hiringdefined.web.rest.dto.InterviewStepDTO;
-import com.hiringdefined.web.rest.mapper.InterviewStepMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing InterviewStep.
@@ -34,9 +28,6 @@ public class InterviewStepResource {
     @Inject
     private InterviewStepRepository interviewStepRepository;
 
-    @Inject
-    private InterviewStepMapper interviewStepMapper;
-
     /**
      * POST  /interviewSteps -> Create a new interviewStep.
      */
@@ -44,14 +35,13 @@ public class InterviewStepResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> create(@Valid @RequestBody InterviewStepDTO interviewStepDTO) throws URISyntaxException {
-        log.debug("REST request to save InterviewStep : {}", interviewStepDTO);
-        if (interviewStepDTO.getId() != null) {
+    public ResponseEntity<Void> create(@RequestBody InterviewStep interviewStep) throws URISyntaxException {
+        log.debug("REST request to save InterviewStep : {}", interviewStep);
+        if (interviewStep.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new interviewStep cannot already have an ID").build();
         }
-        InterviewStep interviewStep = interviewStepMapper.interviewStepDTOToInterviewStep(interviewStepDTO);
         interviewStepRepository.save(interviewStep);
-        return ResponseEntity.created(new URI("/api/interviewSteps/" + interviewStepDTO.getId())).build();
+        return ResponseEntity.created(new URI("/api/interviewSteps/" + interviewStep.getId())).build();
     }
 
     /**
@@ -61,12 +51,11 @@ public class InterviewStepResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> update(@Valid @RequestBody InterviewStepDTO interviewStepDTO) throws URISyntaxException {
-        log.debug("REST request to update InterviewStep : {}", interviewStepDTO);
-        if (interviewStepDTO.getId() == null) {
-            return create(interviewStepDTO);
+    public ResponseEntity<Void> update(@RequestBody InterviewStep interviewStep) throws URISyntaxException {
+        log.debug("REST request to update InterviewStep : {}", interviewStep);
+        if (interviewStep.getId() == null) {
+            return create(interviewStep);
         }
-        InterviewStep interviewStep = interviewStepMapper.interviewStepDTOToInterviewStep(interviewStepDTO);
         interviewStepRepository.save(interviewStep);
         return ResponseEntity.ok().build();
     }
@@ -78,12 +67,9 @@ public class InterviewStepResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional(readOnly = true)
-    public List<InterviewStepDTO> getAll() {
+    public List<InterviewStep> getAll() {
         log.debug("REST request to get all InterviewSteps");
-        return interviewStepRepository.findAll().stream()
-            .map(interviewStep -> interviewStepMapper.interviewStepToInterviewStepDTO(interviewStep))
-            .collect(Collectors.toCollection(LinkedList::new));
+        return interviewStepRepository.findAll();
     }
 
     /**
@@ -93,12 +79,11 @@ public class InterviewStepResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<InterviewStepDTO> get(@PathVariable String id) {
+    public ResponseEntity<InterviewStep> get(@PathVariable Long id) {
         log.debug("REST request to get InterviewStep : {}", id);
         return Optional.ofNullable(interviewStepRepository.findOne(id))
-            .map(interviewStepMapper::interviewStepToInterviewStepDTO)
-            .map(interviewStepDTO -> new ResponseEntity<>(
-                interviewStepDTO,
+            .map(interviewStep -> new ResponseEntity<>(
+                interviewStep,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -110,7 +95,7 @@ public class InterviewStepResource {
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable Long id) {
         log.debug("REST request to delete InterviewStep : {}", id);
         interviewStepRepository.delete(id);
     }

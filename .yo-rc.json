@@ -4,18 +4,18 @@
     "packageName": "com.hiringdefined",
     "packageFolder": "com/hiringdefined",
     "authenticationType": "xauth",
-    "hibernateCache": "no",
+    "hibernateCache": "ehcache",
     "clusteredHttpSession": "no",
     "websocket": "no",
-    "databaseType": "mongodb",
-    "devDatabaseType": "mongodb",
-    "prodDatabaseType": "mongodb",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
     "searchEngine": "no",
     "useCompass": false,
     "buildTool": "gradle",
     "frontendBuilder": "gulp",
     "javaVersion": "8",
     "enableTranslation": false,
-    "rememberMeKey": "5d2bee5548b5124619985c04ec09f76bab85670e"
+    "rememberMeKey": "bd5c62da8ade138110ea4a0ce0b743f9decef658"
   }
 }

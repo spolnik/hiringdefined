@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Open Position</span> {{openPosition.id}}</h2>
+    <h2><span>OpenPosition</span> {{openPosition.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,26 +12,26 @@
             <tbody>
                 <tr>
                     <td>
-                        <span>Company Name</span>
+                        <span>Name</span>
                     </td>
                     <td>
-                        <select class="input-sm form-control" ng-model="openPosition.companyName" ng-options="company for company in companies"></select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>Position</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{openPosition.position}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.name}}" readonly>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span>Seniority</span>
+                        <span>Domain</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{openPosition.seniority}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.domain}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Level</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.level}}" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -64,6 +64,22 @@
                     </td>
                     <td>
                         <input type="text" class="input-sm form-control" value="{{openPosition.state}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>company</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.company.id}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>interview</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.interview.id}}" readonly>
                     </td>
                 </tr>
             </tbody>

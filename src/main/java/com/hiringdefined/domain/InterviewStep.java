@@ -1,39 +1,40 @@
 package com.hiringdefined.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
  * A InterviewStep.
  */
-@Document(collection = "INTERVIEWSTEP")
+@Entity
+@Table(name = "INTERVIEWSTEP")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class InterviewStep implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @NotNull
-    @Field("name")
+    @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Field("description")
+    @Column(name = "description")
     private String description;
 
-    @NotNull
-    @Field("stage_nr")
-    private String stageNr;
+    @ManyToOne
+    private Interview interview;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,12 +54,12 @@ public class InterviewStep implements Serializable {
         this.description = description;
     }
 
-    public String getStageNr() {
-        return stageNr;
+    public Interview getInterview() {
+        return interview;
     }
 
-    public void setStageNr(String stageNr) {
-        this.stageNr = stageNr;
+    public void setInterview(Interview interview) {
+        this.interview = interview;
     }
 
     @Override
@@ -88,7 +89,6 @@ public class InterviewStep implements Serializable {
                 "id=" + id +
                 ", name='" + name + "'" +
                 ", description='" + description + "'" +
-                ", stageNr='" + stageNr + "'" +
                 '}';
     }
 }

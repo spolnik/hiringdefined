@@ -16,7 +16,7 @@
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+                <form name="editForm" role="form" novalidate ng-submit="save()">
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -33,40 +33,21 @@
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" name="name"
-                                   ng-model="interviewStep.name" required>
+                                   ng-model="interviewStep.name">
 
-                            <div ng-show="editForm.name.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.name.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
                             <input type="text" class="form-control" name="description"
-                                   ng-model="interviewStep.description" required>
+                                   ng-model="interviewStep.description">
 
-                            <div ng-show="editForm.description.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.description.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label>StageNr</label>
-                            <input type="text" class="form-control" name="stageNr"
-                                   ng-model="interviewStep.stageNr" required>
-
-                            <div ng-show="editForm.stageNr.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.stageNr.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
+                            <label>interview</label>
+                            <select class="form-control" name="interview" ng-model="interviewStep.interview.id" ng-options="interview.id as interview.id for interview in interviews">
+                            </select>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -113,7 +94,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>StageNr</th>
+                    <th>interview</th>
                     <th></th>
                 </tr>
             </thead>
@@ -122,7 +103,7 @@
                     <td><a ui-sref="interviewStepDetail({id:interviewStep.id})">{{interviewStep.id}}</a></td>
                     <td>{{interviewStep.name}}</td>
                     <td>{{interviewStep.description}}</td>
-                    <td>{{interviewStep.stageNr}}</td>
+                    <td>{{interviewStep.interview.id}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="interviewStepDetail({id:interviewStep.id})"

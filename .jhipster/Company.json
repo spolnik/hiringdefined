@@ -1,76 +1,88 @@
 {
-    "relationships": [],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "companyName",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Company Name",
-            "fieldNameUnderscored": "company_name",
-            "fieldInJavaBeanMethod": "CompanyName",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "url",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Url",
-            "fieldNameUnderscored": "url",
-            "fieldInJavaBeanMethod": "Url",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "contactPerson",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Contact Person",
-            "fieldNameUnderscored": "contact_person",
-            "fieldInJavaBeanMethod": "ContactPerson",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "contactEmail",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Contact Email",
-            "fieldNameUnderscored": "contact_email",
-            "fieldInJavaBeanMethod": "ContactEmail",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "owner",
-            "fieldType": "String",
-            "fieldNameCapitalized": "Owner",
-            "fieldNameUnderscored": "owner",
-            "fieldInJavaBeanMethod": "Owner",
-            "fieldValidate": true,
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "fieldsContainOwnerManyToMany": false,
-    "fieldsContainOwnerOneToOne": false,
-    "fieldsContainOneToMany": false,
-    "fieldsContainLocalDate": false,
-    "fieldsContainCustomTime": false,
-    "fieldsContainBigDecimal": false,
-    "fieldsContainDateTime": false,
-    "fieldsContainDate": false,
-    "dto": "mapstruct",
-    "pagination": "no",
-    "validation": true
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "candidate",
+      "relationshipNameCapitalized": "Candidate",
+      "relationshipFieldName": "candidate",
+      "otherEntityName": "candidate",
+      "relationshipType": "one-to-many",
+      "otherEntityNameCapitalized": "Candidate",
+      "otherEntityRelationshipName": "company"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "openPosition",
+      "relationshipNameCapitalized": "OpenPosition",
+      "relationshipFieldName": "openPosition",
+      "otherEntityName": "openPosition",
+      "relationshipType": "one-to-many",
+      "otherEntityNameCapitalized": "OpenPosition",
+      "otherEntityRelationshipName": "company"
+    },
+    {
+      "relationshipId": 3,
+      "relationshipName": "user",
+      "relationshipNameCapitalized": "User",
+      "relationshipFieldName": "user",
+      "otherEntityName": "user",
+      "otherEntityNameCapitalized": "User",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldNameCapitalized": "Name",
+      "fieldNameUnderscored": "name",
+      "fieldInJavaBeanMethod": "Name",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "contactPerson",
+      "fieldNameCapitalized": "ContactPerson",
+      "fieldNameUnderscored": "contact_person",
+      "fieldInJavaBeanMethod": "ContactPerson",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "contactEmail",
+      "fieldNameCapitalized": "ContactEmail",
+      "fieldNameUnderscored": "contact_email",
+      "fieldInJavaBeanMethod": "ContactEmail",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "url",
+      "fieldNameCapitalized": "Url",
+      "fieldNameUnderscored": "url",
+      "fieldInJavaBeanMethod": "Url",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": true,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
 }

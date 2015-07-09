@@ -3,7 +3,6 @@ package com.hiringdefined.web.rest;
 import com.hiringdefined.Application;
 import com.hiringdefined.domain.Interview;
 import com.hiringdefined.repository.InterviewRepository;
-import com.hiringdefined.web.rest.mapper.InterviewMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -38,18 +38,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class InterviewResourceTest {
 
-    private static final String DEFAULT_COMPANY_NAME = "SAMPLE_TEXT";
-    private static final String UPDATED_COMPANY_NAME = "UPDATED_TEXT";
-    private static final String DEFAULT_POSITION = "SAMPLE_TEXT";
-    private static final String UPDATED_POSITION = "UPDATED_TEXT";
-    private static final String DEFAULT_SENIORITY = "SAMPLE_TEXT";
-    private static final String UPDATED_SENIORITY = "UPDATED_TEXT";
+    private static final String DEFAULT_NAME = "SAMPLE_TEXT";
+    private static final String UPDATED_NAME = "UPDATED_TEXT";
+    private static final String DEFAULT_DOMAIN = "SAMPLE_TEXT";
+    private static final String UPDATED_DOMAIN = "UPDATED_TEXT";
+    private static final String DEFAULT_LEVEL = "SAMPLE_TEXT";
+    private static final String UPDATED_LEVEL = "UPDATED_TEXT";
 
     @Inject
     private InterviewRepository interviewRepository;
-
-    @Inject
-    private InterviewMapper interviewMapper;
 
     private MockMvc restInterviewMockMvc;
 
@@ -60,20 +57,19 @@ public class InterviewResourceTest {
         MockitoAnnotations.initMocks(this);
         InterviewResource interviewResource = new InterviewResource();
         ReflectionTestUtils.setField(interviewResource, "interviewRepository", interviewRepository);
-        ReflectionTestUtils.setField(interviewResource, "interviewMapper", interviewMapper);
         this.restInterviewMockMvc = MockMvcBuilders.standaloneSetup(interviewResource).build();
     }
 
     @Before
     public void initTest() {
-        interviewRepository.deleteAll();
         interview = new Interview();
-        interview.setCompanyName(DEFAULT_COMPANY_NAME);
-        interview.setPosition(DEFAULT_POSITION);
-        interview.setSeniority(DEFAULT_SENIORITY);
+        interview.setName(DEFAULT_NAME);
+        interview.setDomain(DEFAULT_DOMAIN);
+        interview.setLevel(DEFAULT_LEVEL);
     }
 
     @Test
+    @Transactional
     public void createInterview() throws Exception {
         int databaseSizeBeforeCreate = interviewRepository.findAll().size();
 
@@ -87,96 +83,45 @@ public class InterviewResourceTest {
         List<Interview> interviews = interviewRepository.findAll();
         assertThat(interviews).hasSize(databaseSizeBeforeCreate + 1);
         Interview testInterview = interviews.get(interviews.size() - 1);
-        assertThat(testInterview.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
-        assertThat(testInterview.getPosition()).isEqualTo(DEFAULT_POSITION);
-        assertThat(testInterview.getSeniority()).isEqualTo(DEFAULT_SENIORITY);
+        assertThat(testInterview.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testInterview.getDomain()).isEqualTo(DEFAULT_DOMAIN);
+        assertThat(testInterview.getLevel()).isEqualTo(DEFAULT_LEVEL);
     }
 
     @Test
-    public void checkCompanyNameIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(interviewRepository.findAll()).hasSize(0);
-        // set the field null
-        interview.setCompanyName(null);
-
-        // Create the Interview, which fails.
-        restInterviewMockMvc.perform(post("/api/interviews")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(interview)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<Interview> interviews = interviewRepository.findAll();
-        assertThat(interviews).hasSize(0);
-    }
-
-    @Test
-    public void checkPositionIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(interviewRepository.findAll()).hasSize(0);
-        // set the field null
-        interview.setPosition(null);
-
-        // Create the Interview, which fails.
-        restInterviewMockMvc.perform(post("/api/interviews")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(interview)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<Interview> interviews = interviewRepository.findAll();
-        assertThat(interviews).hasSize(0);
-    }
-
-    @Test
-    public void checkSeniorityIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(interviewRepository.findAll()).hasSize(0);
-        // set the field null
-        interview.setSeniority(null);
-
-        // Create the Interview, which fails.
-        restInterviewMockMvc.perform(post("/api/interviews")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(interview)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<Interview> interviews = interviewRepository.findAll();
-        assertThat(interviews).hasSize(0);
-    }
-
-    @Test
+    @Transactional
     public void getAllInterviews() throws Exception {
         // Initialize the database
-        interviewRepository.save(interview);
+        interviewRepository.saveAndFlush(interview);
 
         // Get all the interviews
         restInterviewMockMvc.perform(get("/api/interviews"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(interview.getId())))
-                .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
-                .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
-                .andExpect(jsonPath("$.[*].seniority").value(hasItem(DEFAULT_SENIORITY.toString())));
+                .andExpect(jsonPath("$.[*].id").value(hasItem(interview.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].domain").value(hasItem(DEFAULT_DOMAIN.toString())))
+                .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())));
     }
 
     @Test
+    @Transactional
     public void getInterview() throws Exception {
         // Initialize the database
-        interviewRepository.save(interview);
+        interviewRepository.saveAndFlush(interview);
 
         // Get the interview
         restInterviewMockMvc.perform(get("/api/interviews/{id}", interview.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(interview.getId()))
-            .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
-            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
-            .andExpect(jsonPath("$.seniority").value(DEFAULT_SENIORITY.toString()));
+            .andExpect(jsonPath("$.id").value(interview.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.domain").value(DEFAULT_DOMAIN.toString()))
+            .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL.toString()));
     }
 
     @Test
+    @Transactional
     public void getNonExistingInterview() throws Exception {
         // Get the interview
         restInterviewMockMvc.perform(get("/api/interviews/{id}", Long.MAX_VALUE))
@@ -184,16 +129,17 @@ public class InterviewResourceTest {
     }
 
     @Test
+    @Transactional
     public void updateInterview() throws Exception {
         // Initialize the database
-        interviewRepository.save(interview);
+        interviewRepository.saveAndFlush(interview);
 
 		int databaseSizeBeforeUpdate = interviewRepository.findAll().size();
 
         // Update the interview
-        interview.setCompanyName(UPDATED_COMPANY_NAME);
-        interview.setPosition(UPDATED_POSITION);
-        interview.setSeniority(UPDATED_SENIORITY);
+        interview.setName(UPDATED_NAME);
+        interview.setDomain(UPDATED_DOMAIN);
+        interview.setLevel(UPDATED_LEVEL);
         restInterviewMockMvc.perform(put("/api/interviews")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(interview)))
@@ -203,15 +149,16 @@ public class InterviewResourceTest {
         List<Interview> interviews = interviewRepository.findAll();
         assertThat(interviews).hasSize(databaseSizeBeforeUpdate);
         Interview testInterview = interviews.get(interviews.size() - 1);
-        assertThat(testInterview.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
-        assertThat(testInterview.getPosition()).isEqualTo(UPDATED_POSITION);
-        assertThat(testInterview.getSeniority()).isEqualTo(UPDATED_SENIORITY);
+        assertThat(testInterview.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testInterview.getDomain()).isEqualTo(UPDATED_DOMAIN);
+        assertThat(testInterview.getLevel()).isEqualTo(UPDATED_LEVEL);
     }
 
     @Test
+    @Transactional
     public void deleteInterview() throws Exception {
         // Initialize the database
-        interviewRepository.save(interview);
+        interviewRepository.saveAndFlush(interview);
 
 		int databaseSizeBeforeDelete = interviewRepository.findAll().size();
 

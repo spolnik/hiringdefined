@@ -1,4 +1,4 @@
-// Generated on 2015-06-24 using generator-jhipster 2.16.1
+// Generated on 2015-07-09 using generator-jhipster 2.16.1
 /* jshint camelcase: false */
 'use strict';
 
@@ -92,7 +92,8 @@ gulp.task('serve', function() {
             '/configprops',
             '/api-docs',
             '/metrics',
-            '/dump'
+            '/dump',
+            '/console/'
         ];
 
         var requireTrailingSlash = proxyRoutes.filter(function (r) {

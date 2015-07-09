@@ -1,10 +1,8 @@
 {
   "name": "hiringdefined",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "description": "Description for hiringdefined",
   "private": true,
-  "dependencies": {
-  },
   "devDependencies": {
     "browser-sync": "2.7.6",
     "del": "1.1.1",

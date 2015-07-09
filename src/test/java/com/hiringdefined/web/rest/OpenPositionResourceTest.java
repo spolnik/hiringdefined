@@ -3,7 +3,6 @@ package com.hiringdefined.web.rest;
 import com.hiringdefined.Application;
 import com.hiringdefined.domain.OpenPosition;
 import com.hiringdefined.repository.OpenPositionRepository;
-import com.hiringdefined.web.rest.mapper.OpenPositionMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -38,12 +38,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class OpenPositionResourceTest {
 
-    private static final String DEFAULT_COMPANY_NAME = "SAMPLE_TEXT";
-    private static final String UPDATED_COMPANY_NAME = "UPDATED_TEXT";
-    private static final String DEFAULT_POSITION = "SAMPLE_TEXT";
-    private static final String UPDATED_POSITION = "UPDATED_TEXT";
-    private static final String DEFAULT_SENIORITY = "SAMPLE_TEXT";
-    private static final String UPDATED_SENIORITY = "UPDATED_TEXT";
+    private static final String DEFAULT_NAME = "SAMPLE_TEXT";
+    private static final String UPDATED_NAME = "UPDATED_TEXT";
+    private static final String DEFAULT_DOMAIN = "SAMPLE_TEXT";
+    private static final String UPDATED_DOMAIN = "UPDATED_TEXT";
+    private static final String DEFAULT_LEVEL = "SAMPLE_TEXT";
+    private static final String UPDATED_LEVEL = "UPDATED_TEXT";
     private static final String DEFAULT_LOCATION = "SAMPLE_TEXT";
     private static final String UPDATED_LOCATION = "UPDATED_TEXT";
     private static final String DEFAULT_DESCRIPTION = "SAMPLE_TEXT";
@@ -56,9 +56,6 @@ public class OpenPositionResourceTest {
     @Inject
     private OpenPositionRepository openPositionRepository;
 
-    @Inject
-    private OpenPositionMapper openPositionMapper;
-
     private MockMvc restOpenPositionMockMvc;
 
     private OpenPosition openPosition;
@@ -68,17 +65,15 @@ public class OpenPositionResourceTest {
         MockitoAnnotations.initMocks(this);
         OpenPositionResource openPositionResource = new OpenPositionResource();
         ReflectionTestUtils.setField(openPositionResource, "openPositionRepository", openPositionRepository);
-        ReflectionTestUtils.setField(openPositionResource, "openPositionMapper", openPositionMapper);
         this.restOpenPositionMockMvc = MockMvcBuilders.standaloneSetup(openPositionResource).build();
     }
 
     @Before
     public void initTest() {
-        openPositionRepository.deleteAll();
         openPosition = new OpenPosition();
-        openPosition.setCompanyName(DEFAULT_COMPANY_NAME);
-        openPosition.setPosition(DEFAULT_POSITION);
-        openPosition.setSeniority(DEFAULT_SENIORITY);
+        openPosition.setName(DEFAULT_NAME);
+        openPosition.setDomain(DEFAULT_DOMAIN);
+        openPosition.setLevel(DEFAULT_LEVEL);
         openPosition.setLocation(DEFAULT_LOCATION);
         openPosition.setDescription(DEFAULT_DESCRIPTION);
         openPosition.setRequirements(DEFAULT_REQUIREMENTS);
@@ -86,6 +81,7 @@ public class OpenPositionResourceTest {
     }
 
     @Test
+    @Transactional
     public void createOpenPosition() throws Exception {
         int databaseSizeBeforeCreate = openPositionRepository.findAll().size();
 
@@ -99,9 +95,9 @@ public class OpenPositionResourceTest {
         List<OpenPosition> openPositions = openPositionRepository.findAll();
         assertThat(openPositions).hasSize(databaseSizeBeforeCreate + 1);
         OpenPosition testOpenPosition = openPositions.get(openPositions.size() - 1);
-        assertThat(testOpenPosition.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
-        assertThat(testOpenPosition.getPosition()).isEqualTo(DEFAULT_POSITION);
-        assertThat(testOpenPosition.getSeniority()).isEqualTo(DEFAULT_SENIORITY);
+        assertThat(testOpenPosition.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testOpenPosition.getDomain()).isEqualTo(DEFAULT_DOMAIN);
+        assertThat(testOpenPosition.getLevel()).isEqualTo(DEFAULT_LEVEL);
         assertThat(testOpenPosition.getLocation()).isEqualTo(DEFAULT_LOCATION);
         assertThat(testOpenPosition.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testOpenPosition.getRequirements()).isEqualTo(DEFAULT_REQUIREMENTS);
@@ -109,144 +105,19 @@ public class OpenPositionResourceTest {
     }
 
     @Test
-    public void checkCompanyNameIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setCompanyName(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
-    public void checkPositionIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setPosition(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
-    public void checkSeniorityIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setSeniority(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
-    public void checkLocationIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setLocation(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
-    public void checkDescriptionIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setDescription(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
-    public void checkRequirementsIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setRequirements(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
-    public void checkStateIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(openPositionRepository.findAll()).hasSize(0);
-        // set the field null
-        openPosition.setState(null);
-
-        // Create the OpenPosition, which fails.
-        restOpenPositionMockMvc.perform(post("/api/openPositions")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(openPosition)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<OpenPosition> openPositions = openPositionRepository.findAll();
-        assertThat(openPositions).hasSize(0);
-    }
-
-    @Test
+    @Transactional
     public void getAllOpenPositions() throws Exception {
         // Initialize the database
-        openPositionRepository.save(openPosition);
+        openPositionRepository.saveAndFlush(openPosition);
 
         // Get all the openPositions
         restOpenPositionMockMvc.perform(get("/api/openPositions"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(openPosition.getId())))
-                .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
-                .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
-                .andExpect(jsonPath("$.[*].seniority").value(hasItem(DEFAULT_SENIORITY.toString())))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(openPosition.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].domain").value(hasItem(DEFAULT_DOMAIN.toString())))
+                .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())))
                 .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].requirements").value(hasItem(DEFAULT_REQUIREMENTS.toString())))
@@ -254,18 +125,19 @@ public class OpenPositionResourceTest {
     }
 
     @Test
+    @Transactional
     public void getOpenPosition() throws Exception {
         // Initialize the database
-        openPositionRepository.save(openPosition);
+        openPositionRepository.saveAndFlush(openPosition);
 
         // Get the openPosition
         restOpenPositionMockMvc.perform(get("/api/openPositions/{id}", openPosition.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(openPosition.getId()))
-            .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
-            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
-            .andExpect(jsonPath("$.seniority").value(DEFAULT_SENIORITY.toString()))
+            .andExpect(jsonPath("$.id").value(openPosition.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.domain").value(DEFAULT_DOMAIN.toString()))
+            .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.requirements").value(DEFAULT_REQUIREMENTS.toString()))
@@ -273,6 +145,7 @@ public class OpenPositionResourceTest {
     }
 
     @Test
+    @Transactional
     public void getNonExistingOpenPosition() throws Exception {
         // Get the openPosition
         restOpenPositionMockMvc.perform(get("/api/openPositions/{id}", Long.MAX_VALUE))
@@ -280,16 +153,17 @@ public class OpenPositionResourceTest {
     }
 
     @Test
+    @Transactional
     public void updateOpenPosition() throws Exception {
         // Initialize the database
-        openPositionRepository.save(openPosition);
+        openPositionRepository.saveAndFlush(openPosition);
 
 		int databaseSizeBeforeUpdate = openPositionRepository.findAll().size();
 
         // Update the openPosition
-        openPosition.setCompanyName(UPDATED_COMPANY_NAME);
-        openPosition.setPosition(UPDATED_POSITION);
-        openPosition.setSeniority(UPDATED_SENIORITY);
+        openPosition.setName(UPDATED_NAME);
+        openPosition.setDomain(UPDATED_DOMAIN);
+        openPosition.setLevel(UPDATED_LEVEL);
         openPosition.setLocation(UPDATED_LOCATION);
         openPosition.setDescription(UPDATED_DESCRIPTION);
         openPosition.setRequirements(UPDATED_REQUIREMENTS);
@@ -303,9 +177,9 @@ public class OpenPositionResourceTest {
         List<OpenPosition> openPositions = openPositionRepository.findAll();
         assertThat(openPositions).hasSize(databaseSizeBeforeUpdate);
         OpenPosition testOpenPosition = openPositions.get(openPositions.size() - 1);
-        assertThat(testOpenPosition.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
-        assertThat(testOpenPosition.getPosition()).isEqualTo(UPDATED_POSITION);
-        assertThat(testOpenPosition.getSeniority()).isEqualTo(UPDATED_SENIORITY);
+        assertThat(testOpenPosition.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testOpenPosition.getDomain()).isEqualTo(UPDATED_DOMAIN);
+        assertThat(testOpenPosition.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testOpenPosition.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testOpenPosition.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testOpenPosition.getRequirements()).isEqualTo(UPDATED_REQUIREMENTS);
@@ -313,9 +187,10 @@ public class OpenPositionResourceTest {
     }
 
     @Test
+    @Transactional
     public void deleteOpenPosition() throws Exception {
         // Initialize the database
-        openPositionRepository.save(openPosition);
+        openPositionRepository.saveAndFlush(openPosition);
 
 		int databaseSizeBeforeDelete = openPositionRepository.findAll().size();
 

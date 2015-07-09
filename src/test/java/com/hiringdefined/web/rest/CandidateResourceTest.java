@@ -3,7 +3,6 @@ package com.hiringdefined.web.rest;
 import com.hiringdefined.Application;
 import com.hiringdefined.domain.Candidate;
 import com.hiringdefined.repository.CandidateRepository;
-import com.hiringdefined.web.rest.mapper.CandidateMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -48,14 +48,9 @@ public class CandidateResourceTest {
     private static final String UPDATED_GITHUB = "UPDATED_TEXT";
     private static final String DEFAULT_MOTIVATION = "SAMPLE_TEXT";
     private static final String UPDATED_MOTIVATION = "UPDATED_TEXT";
-    private static final String DEFAULT_OWNER = "SAMPLE_TEXT";
-    private static final String UPDATED_OWNER = "UPDATED_TEXT";
 
     @Inject
     private CandidateRepository candidateRepository;
-
-    @Inject
-    private CandidateMapper candidateMapper;
 
     private MockMvc restCandidateMockMvc;
 
@@ -66,23 +61,21 @@ public class CandidateResourceTest {
         MockitoAnnotations.initMocks(this);
         CandidateResource candidateResource = new CandidateResource();
         ReflectionTestUtils.setField(candidateResource, "candidateRepository", candidateRepository);
-        ReflectionTestUtils.setField(candidateResource, "candidateMapper", candidateMapper);
         this.restCandidateMockMvc = MockMvcBuilders.standaloneSetup(candidateResource).build();
     }
 
     @Before
     public void initTest() {
-        candidateRepository.deleteAll();
         candidate = new Candidate();
         candidate.setFullName(DEFAULT_FULL_NAME);
         candidate.setEmail(DEFAULT_EMAIL);
-        candidate.setLinkedIn(DEFAULT_LINKEDIN);
+        candidate.setLinkedin(DEFAULT_LINKEDIN);
         candidate.setGithub(DEFAULT_GITHUB);
         candidate.setMotivation(DEFAULT_MOTIVATION);
-        candidate.setOwner(DEFAULT_OWNER);
     }
 
     @Test
+    @Transactional
     public void createCandidate() throws Exception {
         int databaseSizeBeforeCreate = candidateRepository.findAll().size();
 
@@ -98,85 +91,49 @@ public class CandidateResourceTest {
         Candidate testCandidate = candidates.get(candidates.size() - 1);
         assertThat(testCandidate.getFullName()).isEqualTo(DEFAULT_FULL_NAME);
         assertThat(testCandidate.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testCandidate.getLinkedIn()).isEqualTo(DEFAULT_LINKEDIN);
+        assertThat(testCandidate.getLinkedin()).isEqualTo(DEFAULT_LINKEDIN);
         assertThat(testCandidate.getGithub()).isEqualTo(DEFAULT_GITHUB);
         assertThat(testCandidate.getMotivation()).isEqualTo(DEFAULT_MOTIVATION);
-        assertThat(testCandidate.getOwner()).isEqualTo(DEFAULT_OWNER);
     }
 
     @Test
-    public void checkFullNameIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(candidateRepository.findAll()).hasSize(0);
-        // set the field null
-        candidate.setFullName(null);
-
-        // Create the Candidate, which fails.
-        restCandidateMockMvc.perform(post("/api/candidates")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(candidate)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<Candidate> candidates = candidateRepository.findAll();
-        assertThat(candidates).hasSize(0);
-    }
-
-    @Test
-    public void checkEmailIsRequired() throws Exception {
-        // Validate the database is empty
-        assertThat(candidateRepository.findAll()).hasSize(0);
-        // set the field null
-        candidate.setEmail(null);
-
-        // Create the Candidate, which fails.
-        restCandidateMockMvc.perform(post("/api/candidates")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(candidate)))
-                .andExpect(status().isBadRequest());
-
-        // Validate the database is still empty
-        List<Candidate> candidates = candidateRepository.findAll();
-        assertThat(candidates).hasSize(0);
-    }
-
-    @Test
+    @Transactional
     public void getAllCandidates() throws Exception {
         // Initialize the database
-        candidateRepository.save(candidate);
+        candidateRepository.saveAndFlush(candidate);
 
         // Get all the candidates
         restCandidateMockMvc.perform(get("/api/candidates"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(candidate.getId())))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(candidate.getId().intValue())))
                 .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME.toString())))
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].linkedIn").value(hasItem(DEFAULT_LINKEDIN.toString())))
+                .andExpect(jsonPath("$.[*].linkedin").value(hasItem(DEFAULT_LINKEDIN.toString())))
                 .andExpect(jsonPath("$.[*].github").value(hasItem(DEFAULT_GITHUB.toString())))
-                .andExpect(jsonPath("$.[*].motivation").value(hasItem(DEFAULT_MOTIVATION.toString())))
-                .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())));
+                .andExpect(jsonPath("$.[*].motivation").value(hasItem(DEFAULT_MOTIVATION.toString())));
     }
 
     @Test
+    @Transactional
     public void getCandidate() throws Exception {
         // Initialize the database
-        candidateRepository.save(candidate);
+        candidateRepository.saveAndFlush(candidate);
 
         // Get the candidate
         restCandidateMockMvc.perform(get("/api/candidates/{id}", candidate.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(candidate.getId()))
+            .andExpect(jsonPath("$.id").value(candidate.getId().intValue()))
             .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.linkedIn").value(DEFAULT_LINKEDIN.toString()))
+            .andExpect(jsonPath("$.linkedin").value(DEFAULT_LINKEDIN.toString()))
             .andExpect(jsonPath("$.github").value(DEFAULT_GITHUB.toString()))
-            .andExpect(jsonPath("$.motivation").value(DEFAULT_MOTIVATION.toString()))
-            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.toString()));
+            .andExpect(jsonPath("$.motivation").value(DEFAULT_MOTIVATION.toString()));
     }
 
     @Test
+    @Transactional
     public void getNonExistingCandidate() throws Exception {
         // Get the candidate
         restCandidateMockMvc.perform(get("/api/candidates/{id}", Long.MAX_VALUE))
@@ -184,19 +141,19 @@ public class CandidateResourceTest {
     }
 
     @Test
+    @Transactional
     public void updateCandidate() throws Exception {
         // Initialize the database
-        candidateRepository.save(candidate);
+        candidateRepository.saveAndFlush(candidate);
 
 		int databaseSizeBeforeUpdate = candidateRepository.findAll().size();
 
         // Update the candidate
         candidate.setFullName(UPDATED_FULL_NAME);
         candidate.setEmail(UPDATED_EMAIL);
-        candidate.setLinkedIn(UPDATED_LINKEDIN);
+        candidate.setLinkedin(UPDATED_LINKEDIN);
         candidate.setGithub(UPDATED_GITHUB);
         candidate.setMotivation(UPDATED_MOTIVATION);
-        candidate.setOwner(UPDATED_OWNER);
         restCandidateMockMvc.perform(put("/api/candidates")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(candidate)))
@@ -208,16 +165,16 @@ public class CandidateResourceTest {
         Candidate testCandidate = candidates.get(candidates.size() - 1);
         assertThat(testCandidate.getFullName()).isEqualTo(UPDATED_FULL_NAME);
         assertThat(testCandidate.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCandidate.getLinkedIn()).isEqualTo(UPDATED_LINKEDIN);
+        assertThat(testCandidate.getLinkedin()).isEqualTo(UPDATED_LINKEDIN);
         assertThat(testCandidate.getGithub()).isEqualTo(UPDATED_GITHUB);
         assertThat(testCandidate.getMotivation()).isEqualTo(UPDATED_MOTIVATION);
-        assertThat(testCandidate.getOwner()).isEqualTo(UPDATED_OWNER);
     }
 
     @Test
+    @Transactional
     public void deleteCandidate() throws Exception {
         // Initialize the database
-        candidateRepository.save(candidate);
+        candidateRepository.saveAndFlush(candidate);
 
 		int databaseSizeBeforeDelete = candidateRepository.findAll().size();
 

@@ -1,64 +1,103 @@
 package com.hiringdefined.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
  * A Interview.
  */
-@Document(collection = "INTERVIEW")
+@Entity
+@Table(name = "INTERVIEW")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Interview implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @NotNull
-    @Field("company_name")
-    private String companyName;
+    @Column(name = "name")
+    private String name;
 
-    @NotNull
-    @Field("position")
-    private String position;
+    @Column(name = "domain")
+    private String domain;
 
-    @NotNull
-    @Field("seniority")
-    private String seniority;
+    @Column(name = "level")
+    private String level;
 
-    public String getId() {
+    @OneToMany(mappedBy = "interview")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<InterviewStep> interviewSteps = new HashSet<>();
+
+    @OneToMany(mappedBy = "interview")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<OpenPosition> openPositions = new HashSet<>();
+
+    @ManyToOne
+    private User user;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPosition() {
-        return position;
+    public String getDomain() {
+        return domain;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
-    public String getSeniority() {
-        return seniority;
+    public String getLevel() {
+        return level;
     }
 
-    public void setSeniority(String seniority) {
-        this.seniority = seniority;
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public Set<InterviewStep> getInterviewSteps() {
+        return interviewSteps;
+    }
+
+    public void setInterviewSteps(Set<InterviewStep> interviewSteps) {
+        this.interviewSteps = interviewSteps;
+    }
+
+    public Set<OpenPosition> getOpenPositions() {
+        return openPositions;
+    }
+
+    public void setOpenPositions(Set<OpenPosition> openPositions) {
+        this.openPositions = openPositions;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -86,9 +125,9 @@ public class Interview implements Serializable {
     public String toString() {
         return "Interview{" +
                 "id=" + id +
-                ", companyName='" + companyName + "'" +
-                ", position='" + position + "'" +
-                ", seniority='" + seniority + "'" +
+                ", name='" + name + "'" +
+                ", domain='" + domain + "'" +
+                ", level='" + level + "'" +
                 '}';
     }
 }

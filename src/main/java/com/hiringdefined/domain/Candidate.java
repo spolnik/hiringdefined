@@ -1,47 +1,49 @@
 package com.hiringdefined.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
  * A Candidate.
  */
-@Document(collection = "CANDIDATE")
+@Entity
+@Table(name = "CANDIDATE")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Candidate implements Serializable {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @NotNull
-    @Field("full_name")
+    @Column(name = "full_name")
     private String fullName;
 
-    @NotNull
-    @Field("email")
+    @Column(name = "email")
     private String email;
 
-    @Field("linkedin")
-    private String linkedIn;
+    @Column(name = "linkedin")
+    private String linkedin;
 
-    @Field("github")
+    @Column(name = "github")
     private String github;
 
-    @Field("motivation")
+    @Column(name = "motivation")
     private String motivation;
 
-    @Field("owner")
-    private String owner;
+    @ManyToOne
+    private Company company;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,12 +63,12 @@ public class Candidate implements Serializable {
         this.email = email;
     }
 
-    public String getLinkedIn() {
-        return linkedIn;
+    public String getLinkedin() {
+        return linkedin;
     }
 
-    public void setLinkedIn(String linkedIn) {
-        this.linkedIn = linkedIn;
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
     }
 
     public String getGithub() {
@@ -85,12 +87,12 @@ public class Candidate implements Serializable {
         this.motivation = motivation;
     }
 
-    public String getOwner() {
-        return owner;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override
@@ -120,10 +122,9 @@ public class Candidate implements Serializable {
                 "id=" + id +
                 ", fullName='" + fullName + "'" +
                 ", email='" + email + "'" +
-                ", linkedIn='" + linkedIn + "'" +
+                ", linkedin='" + linkedin + "'" +
                 ", github='" + github + "'" +
                 ", motivation='" + motivation + "'" +
-                ", owner='" + owner + "'" +
                 '}';
     }
 }
