@@ -5,6 +5,6 @@ angular.module("hiringdefinedApp")
 
 .constant("ENV", "dev")
 
-.constant("VERSION", "0.0.3")
+.constant("VERSION", "0.0.4")
 
 ;
