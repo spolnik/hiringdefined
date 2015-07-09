@@ -1,0 +1,78 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "interviewStep",
+      "relationshipNameCapitalized": "InterviewStep",
+      "relationshipFieldName": "interviewStep",
+      "otherEntityName": "interviewStep",
+      "relationshipType": "one-to-many",
+      "otherEntityNameCapitalized": "InterviewStep",
+      "otherEntityRelationshipName": "interview"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "openPosition",
+      "relationshipNameCapitalized": "OpenPosition",
+      "relationshipFieldName": "openPosition",
+      "otherEntityName": "openPosition",
+      "relationshipType": "one-to-many",
+      "otherEntityNameCapitalized": "OpenPosition",
+      "otherEntityRelationshipName": "interview"
+    },
+    {
+      "relationshipId": 3,
+      "relationshipName": "user",
+      "relationshipNameCapitalized": "User",
+      "relationshipFieldName": "user",
+      "otherEntityName": "user",
+      "otherEntityNameCapitalized": "User",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldNameCapitalized": "Name",
+      "fieldNameUnderscored": "name",
+      "fieldInJavaBeanMethod": "Name",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "domain",
+      "fieldNameCapitalized": "Domain",
+      "fieldNameUnderscored": "domain",
+      "fieldInJavaBeanMethod": "Domain",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "level",
+      "fieldNameCapitalized": "Level",
+      "fieldNameUnderscored": "level",
+      "fieldInJavaBeanMethod": "Level",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": true,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
+}

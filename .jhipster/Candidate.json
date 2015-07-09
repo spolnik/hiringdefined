@@ -1,0 +1,78 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "company",
+      "relationshipNameCapitalized": "Company",
+      "relationshipFieldName": "company",
+      "otherEntityName": "company",
+      "otherEntityNameCapitalized": "Company",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "fullName",
+      "fieldNameCapitalized": "FullName",
+      "fieldNameUnderscored": "full_name",
+      "fieldInJavaBeanMethod": "FullName",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "email",
+      "fieldNameCapitalized": "Email",
+      "fieldNameUnderscored": "email",
+      "fieldInJavaBeanMethod": "Email",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 3,
+      "fieldName": "linkedin",
+      "fieldNameCapitalized": "Linkedin",
+      "fieldNameUnderscored": "linkedin",
+      "fieldInJavaBeanMethod": "Linkedin",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 4,
+      "fieldName": "github",
+      "fieldNameCapitalized": "Github",
+      "fieldNameUnderscored": "github",
+      "fieldInJavaBeanMethod": "Github",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 5,
+      "fieldName": "motivation",
+      "fieldNameCapitalized": "Motivation",
+      "fieldNameUnderscored": "motivation",
+      "fieldInJavaBeanMethod": "Motivation",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": false,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
+}

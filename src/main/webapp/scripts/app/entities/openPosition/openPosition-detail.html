@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span>OpenPosition</span> {{openPosition.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span>Name</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.name}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Domain</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.domain}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Level</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.level}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Location</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.location}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Description</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.description}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Requirements</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.requirements}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>State</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.state}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>company</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.company.id}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>interview</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{openPosition.interview.id}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="openPosition"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

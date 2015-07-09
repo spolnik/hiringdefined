@@ -1,0 +1,48 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "interview",
+      "relationshipNameCapitalized": "Interview",
+      "relationshipFieldName": "interview",
+      "otherEntityName": "interview",
+      "otherEntityNameCapitalized": "Interview",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "name",
+      "fieldNameCapitalized": "Name",
+      "fieldNameUnderscored": "name",
+      "fieldInJavaBeanMethod": "Name",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "description",
+      "fieldNameCapitalized": "Description",
+      "fieldNameUnderscored": "description",
+      "fieldInJavaBeanMethod": "Description",
+      "fieldValidate": false,
+      "fieldType": "String",
+      "fieldIsEnum": false
+    }
+  ],
+  "fieldsContainOwnerOneToOne": false,
+  "fieldsContainOwnerManyToMany": false,
+  "fieldsContainOneToMany": false,
+  "fieldsContainLocalDate": false,
+  "fieldsContainCustomTime": false,
+  "fieldsContainBigDecimal": false,
+  "fieldsContainDateTime": false,
+  "fieldsContainDate": false,
+  "changelogDate": "20150709104300",
+  "dto": "no",
+  "pagination": "no",
+  "validation": false
+}
