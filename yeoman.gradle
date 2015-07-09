@@ -1,6 +1,0 @@
-apply plugin: 'com.moowork.node'
-apply plugin: 'com.moowork.gulp'
-
-processResources.dependsOn gulp_build
-test.dependsOn gulp_test
-
